@@ -74,6 +74,7 @@ public class VerifiableCredential extends Credential {
       .put(ClrCredential, List.of("Ed25519Signature2020", "DataIntegrityProof"))
       .put(VerifiablePresentation, List.of("Ed25519Signature2020", "DataIntegrityProof", "RsaSignature2018"))
       .put(EndorsementCredential, List.of("Ed25519Signature2020", "DataIntegrityProof", "RsaSignature2018"))
+      .put(BitstringStatusListCredential, List.of("Ed25519Signature2020", "DataIntegrityProof"))
       .put(TcpVc, List.of("Ed25519Signature2020", "DataIntegrityProof", "RsaSignature2018"))
       .build();
 
