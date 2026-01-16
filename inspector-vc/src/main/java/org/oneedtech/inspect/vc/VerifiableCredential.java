@@ -3,6 +3,7 @@ package org.oneedtech.inspect.vc;
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.AchievementCredential;
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.ClrCredential;
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.EndorsementCredential;
+import static org.oneedtech.inspect.vc.VerifiableCredential.Type.LerRsVc;
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.VerifiablePresentation;
 
 import java.util.Collections;
@@ -61,6 +62,7 @@ public class VerifiableCredential extends Credential {
           .put(ClrCredential, Catalog.CLR_20_ANY_CLRCREDENTIAL_JSON)
           .put(VerifiablePresentation, Catalog.CLR_20_ANY_CLRCREDENTIAL_JSON)
           .put(EndorsementCredential, Catalog.OB_30_ANY_ENDORSEMENTCREDENTIAL_JSON)
+          .put(LerRsVc, Catalog.LER_RS_VC_JSON)
           .build();
 
   public static final String JSONLD_CONTEXT_W3C_CREDENTIALS_V2 =
@@ -121,6 +123,7 @@ public class VerifiableCredential extends Credential {
     VerifiableCredential(
         List.of("VerifiableCredential")), // this is an underspecifier in our context
     BitstringStatusListCredential(List.of("BitstringStatusListCredential")),
+    LerRsVc(List.of("VerifiableCredential")),
     Unknown(Collections.emptyList());
 
     private final List<String> allowedTypeValues;
