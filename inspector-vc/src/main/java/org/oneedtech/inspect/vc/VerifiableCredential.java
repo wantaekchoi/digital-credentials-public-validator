@@ -4,6 +4,7 @@ import static org.oneedtech.inspect.vc.VerifiableCredential.Type.AchievementCred
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.BitstringStatusListCredential;
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.ClrCredential;
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.EndorsementCredential;
+import static org.oneedtech.inspect.vc.VerifiableCredential.Type.OpenBadgeCredential;
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.TcpVc;
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.VerifiablePresentation;
 
@@ -60,6 +61,7 @@ public class VerifiableCredential extends Credential {
   private static final Map<CredentialEnum, SchemaKey> schemas =
       new ImmutableMap.Builder<CredentialEnum, SchemaKey>()
           .put(AchievementCredential, Catalog.OB_30_ANY_ACHIEVEMENTCREDENTIAL_JSON)
+          .put(OpenBadgeCredential, Catalog.OB_30_ANY_ACHIEVEMENTCREDENTIAL_JSON)
           .put(ClrCredential, Catalog.CLR_20_ANY_CLRCREDENTIAL_JSON)
           .put(VerifiablePresentation, Catalog.CLR_20_ANY_CLRCREDENTIAL_JSON)
           .put(EndorsementCredential, Catalog.OB_30_ANY_ENDORSEMENTCREDENTIAL_JSON)
@@ -68,6 +70,7 @@ public class VerifiableCredential extends Credential {
   private static final Map<CredentialEnum, List<String>> proofTypes =
       new ImmutableMap.Builder<CredentialEnum, List<String>>()
       .put(AchievementCredential, List.of("Ed25519Signature2020", "DataIntegrityProof"))
+      .put(OpenBadgeCredential, List.of("Ed25519Signature2020", "DataIntegrityProof"))
       .put(ClrCredential, List.of("Ed25519Signature2020", "DataIntegrityProof"))
       .put(VerifiablePresentation, List.of("Ed25519Signature2020", "DataIntegrityProof", "RsaSignature2018"))
       .put(EndorsementCredential, List.of("Ed25519Signature2020", "DataIntegrityProof", "RsaSignature2018"))
