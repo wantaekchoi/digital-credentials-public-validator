@@ -8,18 +8,26 @@ import com.apicatalog.multicodec.Multicodec;
 import com.apicatalog.multicodec.MulticodecDecoder;
 import com.apicatalog.multicodec.codec.KeyCodec;
 import com.danubetech.dataintegrity.DataIntegrityProof;
+import com.danubetech.dataintegrity.signer.RsaSignature2018LdSigner;
 import com.danubetech.dataintegrity.verifier.LdVerifier;
+import com.danubetech.dataintegrity.verifier.RsaSignature2018LdVerifier;
+
 import jakarta.json.JsonObject;
 import jakarta.json.JsonStructure;
 import jakarta.json.JsonValue;
+
+import static java.util.stream.Collectors.joining;
+
 import java.net.URI;
 import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 import java.util.Optional;
+
 import org.oneedtech.inspect.core.probe.GeneratedObject;
 import org.oneedtech.inspect.core.probe.Probe;
 import org.oneedtech.inspect.core.probe.RunContext;
 import org.oneedtech.inspect.core.report.ReportItems;
+import org.oneedtech.inspect.vc.Credential.CredentialEnum;
 import org.oneedtech.inspect.vc.VerifiableCredential;
 import org.oneedtech.inspect.vc.W3CVCHolder;
 import org.oneedtech.inspect.vc.probe.did.DidResolution;
@@ -39,9 +47,11 @@ public class EmbeddedProofProbe extends Probe<VerifiableCredential> {
   private static final List<String> ALLOWED_CRYPTOSUITES =
       List.of("eddsa-2022", "eddsa-rdfc-2022", "ecdsa-sd-2023");
   private MulticodecDecoder multicodecDecoder;
+  private CredentialEnum type;
 
-  public EmbeddedProofProbe() {
+  public EmbeddedProofProbe(CredentialEnum type) {
     super(ID, TITLE);
+    this.type = type;
     this.multicodecDecoder =
         MulticodecDecoder.getInstance(
             KeyCodec.ED25519_PUBLIC_KEY, KeyCodec.P256_PUBLIC_KEY, KeyCodec.P384_PUBLIC_KEY);
@@ -62,22 +72,24 @@ public class EmbeddedProofProbe extends Probe<VerifiableCredential> {
     }
 
     // get proof of standard type and purpose
+    List<String> supportedProofTypes = type.getSupportedEmbeddedProofTypes();
     Optional<DataIntegrityProof> selectedProof =
         proofs.stream()
             .filter(proof -> proof.getProofPurpose().equals("assertionMethod"))
             .filter(
                 proof ->
-                    proof.isType("Ed25519Signature2020")
+                    supportedProofTypes.contains(proof.getType())
                         || (proof.isType("DataIntegrityProof")
                             && proof.getJsonObject().containsKey("cryptosuite")
                             && ALLOWED_CRYPTOSUITES.contains(
                                 proof.getJsonObject().get("cryptosuite"))))
             .findFirst();
 
+
     if (!selectedProof.isPresent()) {
       return error(
-          "No proof with type any of (\"Ed25519Signature2020\", \"DataIntegrityProof\" with"
-              + " cryptosuite attr of \"eddsa-rdfc-2022\" or \"eddsa-2022\") or proof purpose"
+          "No proof with type any of (" + supportedProofTypes.stream().collect(joining(", ")) + "), or \"DataIntegrityProof\" with"
+              + " cryptosuite attr of \"eddsa-rdfc-2022\" or \"eddsa-2022\", or proof purpose"
               + " \"assertionMethod\" found",
           ctx);
     }
@@ -248,6 +260,12 @@ public class EmbeddedProofProbe extends Probe<VerifiableCredential> {
     // backwards compatibility for Ed25519Signature2020
     if (proof.isType("Ed25519Signature2020")) {
       return new EmbeddedProofModelGeneratorAwareEd25519Signature2020LdVerifier(publicKey);
+    }
+    if (proof.isType("RsaSignature2018")) {
+      java.security.spec.X509EncodedKeySpec keySpec = new java.security.spec.X509EncodedKeySpec(publicKey);
+      java.security.KeyFactory keyFactory = java.security.KeyFactory.getInstance("RSA");
+      java.security.interfaces.RSAPublicKey rsaPublicKey = (java.security.interfaces.RSAPublicKey) keyFactory.generatePublic(keySpec);
+      return new RsaSignature2018LdVerifier(rsaPublicKey);
     }
     if (proof.isType("DataIntegrityProof")) {
       // get cryptosuite from proof

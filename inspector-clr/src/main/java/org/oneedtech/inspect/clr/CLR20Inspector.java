@@ -171,7 +171,7 @@ public class CLR20Inspector extends VCInspector {
 				//The credential originally contained in a JWT, validate the jwt and external proof.
 				accumulator.add(new ExternalProofProbe(false).run(clr, ctx));
 			} else {
-				accumulator.add(new EmbeddedProofProbe().run(clr, ctx));
+				accumulator.add(new EmbeddedProofProbe(type).run(clr, ctx));
 			}
 			if(broken(accumulator)) return abort(ctx, accumulator, probeCount);
 
@@ -223,7 +223,8 @@ public class CLR20Inspector extends VCInspector {
 			//embedded subject credentials
 			String path = "$.credentialSubject.verifiableCredential";
 			List<JsonNode> vcs = asNodeList(clr.getJson(), path, jsonPath);
-			OB30Inspector.Builder obInspectorBuilder = new OB30Inspector.Builder();
+			OB30Inspector.Builder obInspectorBuilder = new OB30Inspector.Builder()
+				.inject(VNF_CONFIG, this.vnConfig);
 			if (didResolutionUrl != null) {
 				obInspectorBuilder = obInspectorBuilder.inject(DID_RESOLUTION_SERVICE_URL, this.didResolutionUrl);
 			}
