@@ -1,0 +1,284 @@
+{
+	"@context": [
+	  "https://www.w3.org/2018/credentials/v1",
+	  "http://schema.hropenstandards.org/4.5/recruiting/json/VerifiableCredentialLER-RSType.json"
+	],
+	"credentialSubject": {
+	  "type": "http://schema.hropenstandards.org/4.5/recruiting/json/LER-RSType.json",
+	  "documentId": {
+		"value": "88802e91-a760-4173-a595-97bdfb514a63"
+	  },
+	  "person": {
+		"name": {
+		  "formattedName": "Jennifer Jones",
+		  "given": "Jennifer",
+		  "family": "Jones"
+		}
+	  },
+	  "communication": {
+		"address": [
+		  {
+			"city": "Schenectady",
+			"line": "123 Main St.",
+			"postalCode": "12345",
+			"countryCode": "US",
+			"countrySubDivisions": [
+			  {
+				"type": "state",
+				"value": "NY"
+			  }
+			],
+			"useCode": "ResidenceAddress"
+		  }
+		],
+		"phone": [
+		  {
+			"useCode": "private",
+			"preference": 1,
+			"formattedNumber": "+1 555-555-1212",
+			"countryDialingCode": "1",
+			"areaDialingCode": "555",
+			"dialNumber": "5551212"
+		  }
+		],
+		"email": [
+		  {
+			"useCode": "private",
+			"address": "jennifer.jones@example.com"
+		  }
+		],
+		"web": [
+		  {
+			"name": "Linkedin",
+			"url": "https://linkedin.com/in/jenniferjonesexample"
+		  }
+		]
+	  },
+	  "narratives": [
+		{
+		  "name": "Objective",
+		  "texts": [
+			{
+			  "name": "goal",
+			  "lines": [
+				"Looking for a Senior Marketing Manager job where my skills can be fully embraced. I have 5 years experience as a marketing professional."
+			  ]
+			}
+		  ]
+		}
+	  ],
+	  "job": {
+		"positionOpening": {
+		  "documentId": {
+			"value": "J12345",
+			"schemeId": "ATS"
+		  },
+		  "positionProfiles": [
+			{
+			  "positionUri": "https://www.acmecorp.com/jobs/J12345-senior-marketing-manager",
+			  "positionTitle": "Senior Marketing Manager",
+			  "positionOrganizations": [
+				{
+				  "name": "ACME Corp.",
+				  "domainName": "dns:www.acmecorp.com"
+				}
+			  ]
+			}
+		  ]
+		}
+	  },
+	  "educationAndLearnings": [
+		{
+		  "verifications": [
+			{
+			  "@context": [
+				"https://www.w3.org/2018/credentials/v1",
+				"http://schema.hropenstandards.org/4.5/recruiting/json/ler-rs/ProvisionalVerifiableCredentialEducationAndLearningType.json"
+			  ],
+			  "id": "https://www.ncsu.edu/credentials/1872",
+			  "type": [
+				"VerifiableCredential",
+				"FullTranscriptCredential"
+			  ],
+			  "issuer": "https://www.phoenix.edu",
+			  "issuanceDate": "2023-09-01T19:23:24Z",
+			  "credentialSubject": {
+				"id": "did:ebfeb1f712ebc6f1c276e12ec21",
+				"educationAndLearning": {
+				  "start": "2023-09-01",
+				  "end": "2027-04-30",
+				  "institution": {
+					"name": "University of Phoenix",
+					"communication": {
+					  "address": [
+						{
+						  "countryCode": "US",
+						  "countrySubDivisions": [
+							{
+							  "type": "state",
+							  "value": "AZ"
+							}
+						  ]
+						}
+					  ]
+					}
+				  },
+				  "educationDegrees": [
+					{
+					  "name": "Bachelor of Arts",
+					  "iscedEducationLevelCode": "6",
+					  "degreeGrantedStatus": "In Progress",
+					  "specializations": [
+						{
+						  "name": "Marketing",
+						  "type": "major"
+						}
+					  ]
+					}
+				  ]
+				}
+			  },
+			  "proof": [
+				{
+				  "type": "RsaSignature2018",
+				  "created": "2023-09-01T21:19:10Z",
+				  "proofPurpose": "assertionMethod",
+				  "verificationMethod": "https://www.phoenix.edu/issuers/565049#key-1",
+				  "jws": "eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM"
+				}
+			  ]
+			}
+		  ]
+		}
+	  ],
+	  "employmentHistories": [
+		{
+		  "organization": {
+			"tradeName": "ABC Company",
+			"domainName": "dns:abccompany.com",
+			"descriptions": [
+			  "ABC Company is software company in the Talent Acquisition space. We help companies with the ABCs of recruiting!"
+			]
+		  },
+		  "positionHistories": [
+			{
+			  "title": "Marketing Manager",
+			  "location": {
+				"city": "Schenectady",
+				"postalCode": "12345",
+				"countryCode": "US",
+				"descriptions": [
+				  "As the Marketing Manager at ABC Company I performed the following tasks:",
+				  "- Created an annual marketing plan that generated 30 percent more leads compared to the previous year",
+				  "- Increased the conversion rate of leads to accounts by 25 percent compared to the previous year",
+				  "- Increased inbound leads by 33 percent compared to the previous year",
+				  "- Understanding of digital marketing as per my [credential](http://example.com/credentials/3527)"
+				]
+			  },
+			  "organization": {
+				"responsibilityCode": "Unit",
+				"name": "Marketing"
+			  },
+			  "resourceRelationshipCode": "Employee",
+			  "start": "2022-10-01",
+			  "current": true
+			}
+		  ]
+		}
+	  ],
+	  "certifications": [
+		{
+		  "verifications": [
+			{
+			  "@context": [
+				"https://www.w3.org/2018/credentials/v1",
+				"https://purl.imsglobal.org/spec/ob/v3p0/context.json",
+				"https://w3id.org/security/suites/ed25519-2020/v1"
+			  ],
+			  "id": "http://example.com/credentials/3527",
+			  "type": [
+				"VerifiableCredential",
+				"OpenBadgeCredential"
+			  ],
+			  "issuer": {
+				"id": "https://example.edu/issuers/565049",
+				"type": "Profile",
+				"name": "American Council for Education (ACE)"
+			  },
+			  "issuanceDate": "2022-01-01T00:00:00Z",
+			  "expirationDate": "2032-01-01T00:00:00Z",
+			  "name": "Digital Marketing Certificate",
+			  "credentialSubject": {
+				"id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
+				"type": "AchievementSubject",
+				"achievement": {
+				  "id": "https://1edtech.edu/achievements/774",
+				  "type": "Certification",
+				  "criteria": {
+					"narrative": "The Digital Marketing Certificate is the most globally recognized certification in marketing based on prior work experience."
+				  },
+				  "description": "Digital Marketing Certificate",
+				  "name": "Digital Marketing Certificate",
+				  "fieldOfStudy": "Marketing",
+				  "otherIdentifier": [
+					{
+					  "type": "IdentifierEntry",
+					  "identifier": "125432-SA",
+					  "identifierType": "identifier"
+					},
+					{
+					  "type": "IdentifierEntry",
+					  "identifier": "ACE",
+					  "identifierType": "ext:schemeAgencyId"
+					}
+				  ]
+				}
+			  },
+			  "credentialStatus": {
+				"id": "https://1edtech.edu/credentials/3527/revocations",
+				"type": "1EdTechRevocationList"
+			  },
+			  "proof": [
+				{
+				  "type": "Ed25519Signature2020",
+				  "created": "2022-12-15T16:53:56Z",
+				  "verificationMethod": "https://example.com/issuers/876543#z6Mkemnn3wfmGyZdywcRQB3DKiVtTqnUnYhVVuhx1KsdjcTQ",
+				  "proofPurpose": "assertionMethod",
+				  "proofValue": "z5VJKG41dy1BzJdctJRfiSdvdXmFBb37rVAR4ndNQCC2n7HNDY88aQWk9QkLbirZ6nP2AtRMixz12BfqnomVDqZbD"
+				}
+			  ]
+			}
+		  ]
+		}
+	  ],
+	  "attachments": [
+		{
+		  "id": {
+			"value": "resume"
+		  },
+		  "content": {
+			"value": "SmVubmlmZXIgSm9uZXMKMTIzIE1haW4gU3QuLCBTY2hlbmVjdGFkeSwgTlkgMTIzNDUKTW9iaWxlOiArMSA1NTUtNTU1LTEyMTIKamVubmlmZXIuam9uZXNAZXhhbXBsZS5jb20KaHR0cHM6Ly9saW5rZWRpbi5jb20vaW4vamVubmlmZXJqb25lc2V4YW1wbGU=",
+			"encoding": "base64",
+			"mimeType": "text/plain",
+			"filename": "jenniferjonesc.txt"
+		  }
+		}
+	  ]
+	},
+	"id": "http://www.hropen.org",
+	"type": [
+		"VerifiableCredential",
+	  "LER-RS VC"
+	],
+	"issuer": "Resume Builder",
+	"issuanceDate": "2012-05-01T19:23:24Z",
+	"proof": [
+	  {
+		"type": "RsaSignature2018",
+		"created": "2024-10-01T21:19:10Z",
+		"proofPurpose": "assertionMethod",
+		"verificationMethod": "https://www.phoenix.edu/issuers/565049#key-1",
+		"jws": "eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM"
+	  }
+	]
+  }
