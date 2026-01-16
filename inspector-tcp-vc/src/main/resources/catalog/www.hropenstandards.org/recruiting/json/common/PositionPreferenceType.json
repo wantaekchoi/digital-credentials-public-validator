@@ -1,0 +1,84 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "version": "4.4",
+    "title": "PositionPreferenceType",
+    "description": "Contains a collection of information about a candidate's preferences in an ideal position or role.",
+    "type": "object",
+    "properties": {
+        "locations": {
+            "description": "A list of locations which are preferred to the candidate.",
+            "type": "array",
+            "items": { "$ref": "#/definitions/PreferredLocationType" }
+        },
+        "jobCategories": {
+            "description": "A list of job categories which are preferred to the candidate.",
+            "type": "array",
+            "items": { "$ref": "../../../common/json/base/EntityType.json#" }
+        },
+        "positionTitles": {
+            "description": "A list of position titles which are preferred to the candidate.",
+            "$ref": "../../../common/json/base/StringTypeArray.json#"
+        },
+        "positionOfferingTypeCodes": {
+            "description": "These are values that are descriptive in classifying a position within advertising or communications of a position opportunity or offering. Note that these classifications are useful within advertising, but they are not precise classes useful internally to drive pay, benefits, and HR compliance. This is an enumerated list.",
+            "type": "array",
+            "items": { "$ref": "../../../common/json/codelist/PositionTypeCodeList.json#" }
+        },
+        "positionScheduleTypeCodes": {
+            "description": "Values that classify the working schedule of a position offered or a position sought. Essentially, whether a position offered or sought is full-time or part-time or has provision for flexible scheduling. Intended to classify schedule position preferences of a candidate or conversely employer preferences or requirements related to candidates with respect to an advertised position. Used in the context of matching candidates to positions. This is an enumerated list.",
+            "type": "array",
+            "items": { "$ref": "../../../common/json/codelist/PositionScheduleTypeCodeList.json#" }
+        },
+        "shiftSchedules": {
+            "description": "In detail specification of shift schedules.",
+            "type": "array",
+            "items": { "$ref": "../../../common/json/work/ScheduleType.json#" }
+        },
+        "shiftDescriptions": {
+            "description": "A list of shifts which are preferred to the candidate.",
+            "$ref": "../../../common/json/base/StringTypeArray.json#"
+        },
+        "remoteWork": {
+            "description": "The preference for remote work requirement.",
+            "$ref": "RemoteWorkType.json#"
+        },
+        "careerLevelCodes": {
+            "description": "A list of career levels which are preferred to the candidate. This describes the experience level, management level, or other levels of measuring a career.",
+            "type": "array",
+            "items": { "$ref": "../../../common/json/codelist/CareerLevelCodeList.json#" }
+        },
+        "jobGradeCode": {
+            "description": "A job grade code for the position. This would be defined by a company, union, or industry.",
+            "$ref": "../../../common/json/base/EntityType.json#"
+        },
+        "offeredRemunerationPackage": {
+            "description": "The preference for remuneration (including salary or hourly rate, benefits) for a position.",
+            "$ref": "../../../common/json/pay/RemunerationPackageType.json#"
+        },
+        "travel": {
+            "description": "Information regarding travel preferences of a person seeking a job.",
+            "$ref": "TravelType.json#"
+        },
+        "relocation": {
+            "description": "Indicates if a candidate would consider moving to a new city or location for a suitable position.",
+            "$ref": "RelocationType.json#"
+        },
+        "workingLanguageCodes": {
+            "description": "A code classifying the language or languages used within the workplace or associated with work. This is intended to communicate general information about the language(s) used within the work environment or correspondingly general information about a candidate's specific language preferences. This component might be offered as descriptive 'pre-qualification' information on a position announcement. It might appear within the context of a Candidate Profile as a general statement of a candidate's general language capabilities or preferences. WorkingLanguageCode is not intended as a statement of language proficiency or specific requirement relating to language proficiency. Specific information regarding language proficiency should be covered either within PersonCompetency or PositionCompetency as may be appropriate.",
+            "type": "array",
+            "items": { "$ref": "../../../common/json/codelist/LanguageCodeList.json#" }
+        }
+    },
+    "definitions": {
+        "PreferredLocationType": {
+            "title": "PreferredLocationType",
+            "description": "Contains a collection of information about a candidate's preferences in the location of a position.",
+            "type": "object",
+            "properties": {
+                "maximumCommuteDuration": { "$ref": "../../../common/json/base/MeasureType.json#" },
+                "maximumCommuteDistance": { "$ref": "../../../common/json/base/MeasureType.json#" },
+                "referenceLocation": { "$ref": "../../../common/json/communication/AddressType.json#" }
+            }
+        }
+    }
+}

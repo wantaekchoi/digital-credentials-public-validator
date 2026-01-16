@@ -1,0 +1,18 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"version": "4.5.0",
+	"title": "OrganizationKeyStakeholderType",
+	"description": "Represents persons with important roles within or to an organization, e.g., a corporate officer or owner.",
+	"type": "object",
+	"allOf": [
+		{
+			"$ref": "../person/PersonBaseType.json#"
+		}
+	],
+	"properties": {
+		"ownershipPercent": {
+			"description": "The percent of the organization's market value owned by the stakeholder.",
+			"$ref": "../base/PercentType.json#"
+		}
+	}
+}

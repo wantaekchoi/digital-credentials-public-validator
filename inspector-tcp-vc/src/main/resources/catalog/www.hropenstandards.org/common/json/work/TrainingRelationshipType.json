@@ -1,0 +1,28 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"version": "4.5.0",
+	"title": "TrainingRelationshipType",
+	"description": "The relationship of the worker trainee with the Employer or Contractee Organization.",
+	"type": "object",
+	"properties": {
+		"id": {
+			"description": "Provides a unique identifier to a specific work training relationship.",
+			"$ref": "../base/IdentifierType.json#"
+		},
+		"typeCode": {
+			"description": "The type of work training relationship between the Employer or Contractee Organization and the worker. Options are Internship, Externship, Apprenticeship.",
+			"$ref": "../codelist/TrainingRelationshipTypeCodeList.json#"
+		},
+		"status": {
+			"description": "Status of the work training relationship between the Employer or Contractee Organization and the Worker.",
+			"$ref": "TrainingRelationshipStatusType.json#"
+		},
+		"trainingAgreements": {
+			"description": "The work taining agreements for a work training relationship.",
+			"type": "array",
+			"items": {
+				"$ref": "TrainingAgreementType.json#"
+			}
+		}
+	}
+}

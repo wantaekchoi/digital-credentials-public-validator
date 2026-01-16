@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "version": "4.5.0",
+    "title": "WorkTermTypeCodeList",
+    "description": "The term or duration of the work relationship or work assignment. Options are Permanent, Probationary Temporary-Fixed, Temporary-Casual, Temporary-Seasonal.",
+    "enum": [
+        "Permanent",
+        "Probationary",
+        "TemporaryCasual",
+        "TemporaryFixed",
+        "TemporarySeasonal"
+    ],
+    "enumNames": [
+        "A work term that indicates ongoing work relationship with an organization, with no predetermined end date.",
+        "A work term that indicates a set trial period of work at the start of a potentially permanent work It is not a standalone category long term as workers usually convert to permanent or are terminated.",
+        "A work term that indicates irregular, on-call, or as-needed work, no guaranteed hours. Casual workers are temporary, but unlike fixed-term or seasonal workers, they don’t have predictable work schedules or durations.",
+        "A work term that indicates duration-specific (e.g., 6 months) work. .  It may begin and end on specified dates, or when particular events occur. It is used for unpredictable workloads, contract/project work, and other limited-term needs, such as a leave of absence.",
+        "A work term that indicates season of the year or cyclical demand work.  It is often used in retail, agriculture, tourism, etc."
+    ]
+}

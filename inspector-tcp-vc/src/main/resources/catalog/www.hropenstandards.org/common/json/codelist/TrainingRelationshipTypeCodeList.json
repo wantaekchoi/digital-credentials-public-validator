@@ -1,0 +1,11 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"version": "4.5.0",
+	"title": "TrainingRelationshipCodeList",
+	"description": "Work training relationship code list.",
+	"enum": [
+		"Internship",
+		"Externship",
+		"Apprenticeship"
+	]
+}

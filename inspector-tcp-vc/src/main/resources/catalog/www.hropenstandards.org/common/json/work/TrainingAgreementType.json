@@ -1,0 +1,25 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"version": "4.5.0",
+	"title": "TrainingAgreementType",
+	"description": "A training agreement is an implicit or explicit 'agreement' between a worker and an Employer or Contractee Organization in which said worker agrees to perform duties and responsibilities for the organization in some capacity.",
+	"type": "object",
+	"properties": {
+		"id": {
+			"description": "Provides a unique identifier to a specific work training agreement.",
+			"$ref": "../base/IdentifierType.json#"
+		},
+		"inceptionDate": {
+			"description": "The date on which the agreement (e.g., contract) starts.",
+			"$ref": "../base/DateType.json#"
+		},
+		"terminationDate": {
+			"description": "The date on which the agreement (e.g., contract) ends.",
+			"$ref": "../base/DateType.json#"
+		},
+		"trainingDatePeriod": {
+			"description": "The start and end dates of a worker's work training period or duration",
+			"$ref": "../base/DateOpenEndPeriodType.json#"
+		}
+	}
+}
