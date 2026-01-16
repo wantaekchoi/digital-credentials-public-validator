@@ -72,10 +72,12 @@ public class VerifiableCredential extends Credential {
       .put(VerifiablePresentation, List.of("Ed25519Signature2020", "DataIntegrityProof", "RsaSignature2018"))
       .put(EndorsementCredential, List.of("Ed25519Signature2020", "DataIntegrityProof", "RsaSignature2018"))
       .put(TcpVc, List.of("Ed25519Signature2020", "DataIntegrityProof", "RsaSignature2018"))
-          .build();
+      .build();
 
   public static final String JSONLD_CONTEXT_W3C_CREDENTIALS_V2 =
       "https://www.w3.org/ns/credentials/v2";
+  public static final String JSONLD_CONTEXT_W3C_CREDENTIALS_V1 =
+      "https://www.w3.org/2018/credentials/v1";
 
   private static final Map<Set<VerifiableCredential.Type>, List<String>> contextMap =
       new ImmutableMap.Builder<Set<VerifiableCredential.Type>, List<String>>()
@@ -199,6 +201,11 @@ public class VerifiableCredential extends Credential {
     public Map<String, List<String>> getContextVersionPatterns() {
       return contextVersioningPatternMap;
     }
+
+    @Override
+    public List<String> getSupportedEmbeddedProofTypes() {
+      return proofTypes.get(this);
+    }
   }
 
   public enum ProofType {
@@ -226,13 +233,21 @@ public class VerifiableCredential extends Credential {
       this.expirationDateField = expirationDateField;
     }
 
-    static VCVersion of(JsonNode context) {
+    public static VCVersion of(JsonNode context) {
       if (JsonNodeUtil.asNodeList(context).stream()
           .anyMatch(
               node -> node.isTextual() && node.asText().equals(JSONLD_CONTEXT_W3C_CREDENTIALS_V2)))
         return VCDMv2p0;
 
       return VCDMv1p1;
+    }
+
+    public String getIssuanceDateField() {
+      return issuanceDateField;
+    }
+
+    public String getExpirationDateField() {
+      return expirationDateField;
     }
   }
 

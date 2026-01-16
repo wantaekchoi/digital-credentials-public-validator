@@ -94,6 +94,7 @@ public abstract class Credential extends GeneratedObject {
         List<String> getAllowedTypeValues();
         boolean isAllowedTypeValuesRequired();
         List<String> getContextUris();
+        List<String> getSupportedEmbeddedProofTypes();
         Map<String, List<String>> getContextAliases();
         Map<String, List<String>> getContextVersionPatterns();
         String toString();

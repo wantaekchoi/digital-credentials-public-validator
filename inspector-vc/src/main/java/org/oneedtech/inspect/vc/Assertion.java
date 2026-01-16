@@ -156,6 +156,10 @@ public class Assertion extends Credential {
         public Map<String, List<String>> getContextVersionPatterns() {
             return Collections.emptyMap();
         }
+        @Override
+        public List<String> getSupportedEmbeddedProofTypes() {
+            return Collections.emptyList();
+        }
 	}
 
     public enum ValueType {
