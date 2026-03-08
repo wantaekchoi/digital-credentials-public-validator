@@ -26,6 +26,7 @@ import org.oneedtech.inspect.vc.probe.EmbeddedProofProbe;
 import org.oneedtech.inspect.vc.probe.RunContextKey;
 import org.oneedtech.inspect.vc.probe.TypePropertyProbe;
 import org.oneedtech.inspect.vc.probe.did.DidResolver;
+import org.oneedtech.inspect.vc.probe.did.SimpleDidResolver;
 
 public class BitstringStatusListCredentialInspector extends VCInspector {
   private DidResolver didResolver;
@@ -34,6 +35,9 @@ public class BitstringStatusListCredentialInspector extends VCInspector {
       BitstringStatusListCredentialInspector.Builder builder) {
     super(builder);
     this.didResolver = (DidResolver) builder.getInjected(RunContextKey.DID_RESOLVER).orElse(null);
+    if (this.didResolver == null) {
+      this.didResolver = new SimpleDidResolver(null, null);
+    }
   }
 
   @Override
