@@ -11,7 +11,7 @@ import static org.oneedtech.inspect.util.code.Defensives.checkNotNull;
 import static org.oneedtech.inspect.util.json.ObjectMapperCache.Config.DEFAULT;
 import static org.oneedtech.inspect.vc.Credential.CREDENTIAL_KEY;
 import static org.oneedtech.inspect.vc.VCInspector.InjectionKeys.*;
-import static org.oneedtech.inspect.vc.VerifiableCredential.REFRESH_SERVICE_MIME_TYPES;
+import static org.oneedtech.inspect.vc.VerifiableCredential.REFRESH_SERVICE_RESOURCE_TYPES;
 import static org.oneedtech.inspect.vc.VerifiableCredential.ProofType.EXTERNAL;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -160,7 +160,7 @@ public class EndorsementInspector extends VCInspector implements SubInspector {
           // If the refresh is not successful, continue the verification process using the original
           // EndorsementCredential.
           UriResource uriResource =
-              new UriResource(new URI(newID.get()), null, REFRESH_SERVICE_MIME_TYPES);
+              new UriResource(new URI(newID.get()), null, REFRESH_SERVICE_RESOURCE_TYPES);
           if (uriResource.exists()) {
             return this.run(uriResource.setContext(new ResourceContext(REFRESHED, TRUE)));
           }
@@ -244,7 +244,7 @@ public class EndorsementInspector extends VCInspector implements SubInspector {
       probeCount++;
       if (endorsement.getProofType() == EXTERNAL) {
         // The credential originally contained in a JWT, validate the jwt and external proof.
-        accumulator.add(new ExternalProofProbe().run(endorsement, ctx));
+        accumulator.add(new ExternalProofProbe(false).run(endorsement, ctx));
       } else {
         accumulator.add(new EmbeddedProofProbe().run(endorsement, ctx));
       }

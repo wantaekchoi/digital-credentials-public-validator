@@ -7,7 +7,7 @@ import static org.oneedtech.inspect.core.report.ReportUtil.onProbeException;
 import static org.oneedtech.inspect.util.json.ObjectMapperCache.Config.DEFAULT;
 import static org.oneedtech.inspect.vc.Credential.CREDENTIAL_KEY;
 import static org.oneedtech.inspect.vc.VCInspector.InjectionKeys.*;
-import static org.oneedtech.inspect.vc.VerifiableCredential.REFRESH_SERVICE_MIME_TYPES;
+import static org.oneedtech.inspect.vc.VerifiableCredential.REFRESH_SERVICE_RESOURCE_TYPES;
 import static org.oneedtech.inspect.vc.VerifiableCredential.ProofType.EXTERNAL;
 import static org.oneedtech.inspect.vc.payload.PayloadParser.fromJwt;
 import static org.oneedtech.inspect.vc.util.JsonNodeUtil.asNodeList;
@@ -181,7 +181,7 @@ public class CLR20Inspector extends VCInspector {
 				Optional<String> newID = checkRefreshService(clr, ctx);
 				if(newID.isPresent()) {
 					// If the refresh is not successful, continue the verification process using the original OpenBadgeCredential.
-					UriResource uriResource = new UriResource(new URI(newID.get()), null, REFRESH_SERVICE_MIME_TYPES);
+					UriResource uriResource = new UriResource(new URI(newID.get()), null, REFRESH_SERVICE_RESOURCE_TYPES);
 					if (uriResource.exists()) {
 						accumulator.add(this.run(uriResource.setContext(new ResourceContext(REFRESHED, TRUE))));
 					}
