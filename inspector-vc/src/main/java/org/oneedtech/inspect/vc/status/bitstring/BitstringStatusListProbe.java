@@ -1,7 +1,5 @@
 package org.oneedtech.inspect.vc.status.bitstring;
 
-import com.apicatalog.multibase.MultibaseDecoder;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -9,16 +7,20 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.zip.GZIPInputStream;
+
 import org.oneedtech.inspect.core.probe.Outcome;
 import org.oneedtech.inspect.core.probe.Probe;
 import org.oneedtech.inspect.core.probe.RunContext;
 import org.oneedtech.inspect.core.report.Report;
 import org.oneedtech.inspect.core.report.ReportItems;
-import org.oneedtech.inspect.util.resource.MimeType;
+import org.oneedtech.inspect.util.resource.ResourceType;
 import org.oneedtech.inspect.util.resource.UriResource;
 import org.oneedtech.inspect.vc.BitstringStatusListCredentialInspector;
 import org.oneedtech.inspect.vc.VerifiableCredential;
 import org.oneedtech.inspect.vc.probe.RunContextKey;
+
+import com.apicatalog.multibase.MultibaseDecoder;
+import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * Follows algorithm defined at https://w3c.github.io/vc-bitstring-status-list/#validate-algorithm
@@ -51,7 +53,8 @@ public class BitstringStatusListProbe extends Probe<JsonNode> {
       return error("statusListCredential is not a valid URI", ctx);
     }
     UriResource uriResource =
-        new UriResource(statusListCredentialUrl, null, List.of(MimeType.JSON, MimeType.JSON_LD));
+        new UriResource(statusListCredentialUrl, null, List.of(ResourceType.JSON,
+						ResourceType.JSON_LD, ResourceType.JWT, ResourceType.VC_JSON_LD, ResourceType.VC_JWT));
 
     BitstringStatusListCredentialInspector inspector =
         new BitstringStatusListCredentialInspector.Builder()

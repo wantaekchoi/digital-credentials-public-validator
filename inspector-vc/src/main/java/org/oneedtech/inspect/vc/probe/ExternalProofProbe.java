@@ -4,6 +4,7 @@ import static org.oneedtech.inspect.util.code.Defensives.checkTrue;
 
 import java.math.BigInteger;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.security.AlgorithmParameters;
 import java.security.KeyFactory;
 import java.security.interfaces.ECPublicKey;
@@ -30,6 +31,7 @@ import org.oneedtech.inspect.core.probe.RunContext;
 import org.oneedtech.inspect.core.report.ReportItems;
 import org.oneedtech.inspect.vc.VerifiableCredential;
 import org.oneedtech.inspect.vc.probe.did.DidResolution;
+import org.oneedtech.inspect.vc.probe.did.DidResolutionException;
 import org.oneedtech.inspect.vc.probe.did.DidResolver;
 import org.oneedtech.inspect.vc.util.CachingDocumentLoader;
 
@@ -51,8 +53,11 @@ import com.google.common.base.Splitter;
  */
 public class ExternalProofProbe extends Probe<VerifiableCredential> {
 
-	public ExternalProofProbe() {
+	private final boolean allowKidAsHint;
+
+	public ExternalProofProbe(boolean allowKidAsHint) {
 		super(ID);
+		this.allowKidAsHint = allowKidAsHint;
 	}
 
 	@Override
@@ -99,12 +104,15 @@ public class ExternalProofProbe extends Probe<VerifiableCredential> {
 		JsonNode kid = headerObj.get("kid");
 
 		if(jwk == null && kid == null) { throw new Exception("Key must present in either jwk or kid value."); }
-		if(kid != null){
+		if(kid != null) {
+			// check if kid can be a hint to the jwk in dids as defined in https://www.w3.org/TR/vc-jose-cose/#kid
+			boolean kidAsHint = kidCanBeUsedAsHint(kid.textValue(), crd);
+
 			//Load jwk JsonNode from url and do the rest the same below.
 			//TODO Consider additional testing.
 			String kidUrl = kid.textValue();
 			try {
-				String jwkResponse = fetchJwk(kidUrl, ctx);
+				String jwkResponse = fetchJwk(kidUrl, kidAsHint, crd, ctx);
 				jwk = mapper.readTree(jwkResponse);
 			} catch (Exception e) {
 				throw new Exception("Unable to retrieve jwk value from url specified in kid.", e);
@@ -170,11 +178,15 @@ public class ExternalProofProbe extends Probe<VerifiableCredential> {
 		}
 	}
 
-	private String fetchJwk(String fetchUrl, RunContext ctx) throws Exception{
+	private String fetchJwk(String fetchUrl, boolean kidAsHint, VerifiableCredential crd, RunContext ctx) throws Exception {
         String responseString = null;
 
 		URI kidUri = new URI(fetchUrl);
 		if (kidUri.getScheme() == null || kidUri.getScheme().equals("did")) {
+			if (kidUri.getScheme() == null && kidAsHint) {
+				// if the kid value is not a URI, treat it as a fragment and try to resolve it as a did with the kid as hint
+				return fetchJwkFromDidUsingKidAsHint(fetchUrl, crd, ctx);
+			}
 			DidResolver didResolver = ctx.get(RunContextKey.DID_RESOLVER);
 			DidResolution didResolution = didResolver.resolve(kidUri, new CachingDocumentLoader()); // Not using the default document loader options
 			responseString = didResolution.getPublicKeyJwk();
@@ -206,4 +218,39 @@ public class ExternalProofProbe extends Probe<VerifiableCredential> {
 
 	public static final String ID = ExternalProofProbe.class.getSimpleName();
 
+	private boolean kidCanBeUsedAsHint(String kid, VerifiableCredential crd) {
+		if(!allowKidAsHint) return false;
+		// check if kid can be a hint to the jwk in dids as defined in https://www.w3.org/TR/vc-jose-cose/#kid
+		// this is a very basic check that looks for the kid value as a fragment in the credential issuer's DID URL. More complex logic could be added here if needed.
+		if(!crd.getJson().hasNonNull("issuer")) return false;
+		String issuer = getIssuerId(crd);
+		return issuer.startsWith("did:");
+	}
+
+	private String fetchJwkFromDidUsingKidAsHint(String kid, VerifiableCredential crd, RunContext ctx) throws DidResolutionException, URISyntaxException {
+		// get issuer id from credential
+		String issuer = getIssuerId(crd);
+
+		// resolve issuer did
+        DidResolver didResolver = ctx.get(RunContextKey.DID_RESOLVER);
+          DidResolution didResolution =
+              didResolver.resolve(new URI(issuer + "#" + kid), new CachingDocumentLoader()); // Not using the default document loader options
+        return didResolution.getPublicKeyJwk();
+	}
+
+	private String getIssuerId(VerifiableCredential crd) {
+		// issuer node can be either a string or an object with id property. Check both.
+		if(!crd.getJson().hasNonNull("issuer")) {
+			throw new IllegalArgumentException("Credential issuer is required but was not found.");
+		}
+
+		JsonNode issuerNode = crd.getJson().get("issuer");
+		if(issuerNode.isTextual()) {
+			return issuerNode.asText();
+		} else if(issuerNode.isObject() && issuerNode.get("id") != null && issuerNode.get("id").isTextual()) {
+			return issuerNode.get("id").asText();
+		} else {
+			throw new IllegalArgumentException("Credential issuer is required but was not found.");
+		}
+	}
 }

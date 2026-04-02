@@ -9,7 +9,7 @@ import static org.oneedtech.inspect.util.json.ObjectMapperCache.Config.DEFAULT;
 import static org.oneedtech.inspect.vc.Credential.CREDENTIAL_KEY;
 import static org.oneedtech.inspect.vc.VCInspector.InjectionKeys.*;
 import static org.oneedtech.inspect.vc.VerifiableCredential.ProofType.EXTERNAL;
-import static org.oneedtech.inspect.vc.VerifiableCredential.REFRESH_SERVICE_MIME_TYPES;
+import static org.oneedtech.inspect.vc.VerifiableCredential.REFRESH_SERVICE_RESOURCE_TYPES;
 import static org.oneedtech.inspect.vc.payload.PayloadParser.fromJwt;
 import static org.oneedtech.inspect.vc.util.JsonNodeUtil.asNodeList;
 
@@ -251,7 +251,7 @@ public class OB30Inspector extends VCInspector implements SubInspector {
       probeCount++;
       if (ob.getProofType() == EXTERNAL) {
         // The credential originally contained in a JWT, validate the jwt and external proof.
-        accumulator.add(new ExternalProofProbe().run(ob, ctx));
+        accumulator.add(new ExternalProofProbe(false).run(ob, ctx));
       } else {
         // The credential not contained in a jwt, must have an internal proof.
         accumulator.add(new EmbeddedProofProbe().run(ob, ctx));
@@ -266,7 +266,7 @@ public class OB30Inspector extends VCInspector implements SubInspector {
           // If the refresh is not successful, continue the verification process using the original
           // OpenBadgeCredential.
           UriResource uriResource =
-              new UriResource(new URI(newID.get()), null, REFRESH_SERVICE_MIME_TYPES);
+              new UriResource(new URI(newID.get()), null, REFRESH_SERVICE_RESOURCE_TYPES);
           if (uriResource.exists()) {
             accumulator.add(this.run(uriResource.setContext(new ResourceContext(REFRESHED, TRUE))));
           }

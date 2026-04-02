@@ -6,6 +6,8 @@ import static org.oneedtech.inspect.util.resource.ResourceType.JSON;
 import static org.oneedtech.inspect.util.resource.ResourceType.JWT;
 import static org.oneedtech.inspect.util.resource.ResourceType.PNG;
 import static org.oneedtech.inspect.util.resource.ResourceType.SVG;
+import static org.oneedtech.inspect.util.resource.ResourceType.VC_JSON_LD;
+import static org.oneedtech.inspect.util.resource.ResourceType.VC_JWT;
 
 import java.util.List;
 import java.util.Map;
@@ -84,7 +86,7 @@ public abstract class Credential extends GeneratedObject {
 				.toString();
 	}
 
-	public static final List<ResourceType> RECOGNIZED_PAYLOAD_TYPES = List.of(SVG, PNG, JSON, JWT);
+	public static final List<ResourceType> RECOGNIZED_PAYLOAD_TYPES = List.of(SVG, PNG, JSON, JWT, VC_JSON_LD, VC_JWT);
 	public static final String CREDENTIAL_KEY = "CREDENTIAL_KEY";
 
     public interface CredentialEnum {

@@ -5,18 +5,20 @@ import static org.oneedtech.inspect.vc.VerifiableCredential.Type.ClrCredential;
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.EndorsementCredential;
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.VerifiablePresentation;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.google.common.base.MoreObjects;
-import com.google.common.collect.ImmutableMap;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.oneedtech.inspect.schema.Catalog;
 import org.oneedtech.inspect.schema.SchemaKey;
-import org.oneedtech.inspect.util.resource.MimeType;
 import org.oneedtech.inspect.util.resource.Resource;
+import org.oneedtech.inspect.util.resource.ResourceType;
 import org.oneedtech.inspect.vc.util.JsonNodeUtil;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.base.MoreObjects;
+import com.google.common.collect.ImmutableMap;
 
 /**
  * A wrapper object for a verifiable credential. This contains e.g. the origin resource and the
@@ -233,6 +235,6 @@ public class VerifiableCredential extends Credential {
   private static final String EXPIRES_AT_PROPERTY_NAME_V20 = "validUntil";
   public static final String JWT_NODE_NAME = "vc";
   public static final Boolean JWT_ALLOW_WHOLE_PAYLOAD = true;
-  public static final List<MimeType> REFRESH_SERVICE_MIME_TYPES =
-      List.of(MimeType.JSON, MimeType.JSON_LD, MimeType.TEXT_PLAIN);
+  public static final List<ResourceType> REFRESH_SERVICE_RESOURCE_TYPES =
+      List.of(ResourceType.VC_JSON_LD, ResourceType.JSON_LD, ResourceType.JSON, ResourceType.VC_JWT, ResourceType.JWT, ResourceType.PNG, ResourceType.SVG);
 }

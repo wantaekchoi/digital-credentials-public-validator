@@ -18,12 +18,12 @@ public final class JwtParser extends PayloadParser {
 
 	@Override
 	public boolean supports(ResourceType type) {
-		return type == ResourceType.JWT;
+		return type == ResourceType.JWT || type == ResourceType.VC_JWT;
 	}
 
 	@Override
 	public Credential parse(Resource resource, RunContext ctx)  throws Exception {
-		checkTrue(resource.getType() == ResourceType.JWT);
+		checkTrue(resource.getType() == ResourceType.JWT || resource.getType() == ResourceType.VC_JWT);
 		String jwt = resource.asByteSource().asCharSource(UTF_8).read();
 		JsonNode node = fromJwt(jwt, ctx);
 		return getBuilder(ctx)
