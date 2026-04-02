@@ -169,7 +169,7 @@ public class CLR20Inspector extends VCInspector {
 			probeCount++;
 			if(clr.getProofType() == EXTERNAL){
 				//The credential originally contained in a JWT, validate the jwt and external proof.
-				accumulator.add(new ExternalProofProbe().run(clr, ctx));
+				accumulator.add(new ExternalProofProbe(false).run(clr, ctx));
 			} else {
 				accumulator.add(new EmbeddedProofProbe().run(clr, ctx));
 			}

@@ -251,7 +251,7 @@ public class OB30Inspector extends VCInspector implements SubInspector {
       probeCount++;
       if (ob.getProofType() == EXTERNAL) {
         // The credential originally contained in a JWT, validate the jwt and external proof.
-        accumulator.add(new ExternalProofProbe().run(ob, ctx));
+        accumulator.add(new ExternalProofProbe(false).run(ob, ctx));
       } else {
         // The credential not contained in a jwt, must have an internal proof.
         accumulator.add(new EmbeddedProofProbe().run(ob, ctx));
