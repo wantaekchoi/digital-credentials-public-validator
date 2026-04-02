@@ -18,11 +18,13 @@ import org.oneedtech.inspect.util.json.ObjectMapperCache;
 import org.oneedtech.inspect.util.resource.Resource;
 import org.oneedtech.inspect.util.resource.ResourceType;
 import org.oneedtech.inspect.util.spec.Specification;
+import org.oneedtech.inspect.vc.VerifiableCredential.ProofType;
 import org.oneedtech.inspect.vc.VerifiableCredential.Type;
 import org.oneedtech.inspect.vc.probe.ContextPropertyProbe;
 import org.oneedtech.inspect.vc.probe.CredentialParseProbe;
 import org.oneedtech.inspect.vc.probe.CredentialSubjectProbe;
 import org.oneedtech.inspect.vc.probe.EmbeddedProofProbe;
+import org.oneedtech.inspect.vc.probe.ExternalProofProbe;
 import org.oneedtech.inspect.vc.probe.RunContextKey;
 import org.oneedtech.inspect.vc.probe.TypePropertyProbe;
 import org.oneedtech.inspect.vc.probe.did.DidResolver;
@@ -54,6 +56,7 @@ public class BitstringStatusListCredentialInspector extends VCInspector {
             .put(Key.JACKSON_OBJECTMAPPER, mapper)
             .put(Key.JSONPATH_EVALUATOR, jsonPath)
             .put(Key.GENERATED_OBJECT_BUILDER, new VerifiableCredential.Builder())
+            .put(Key.JWT_CREDENTIAL_NODE_NAME, "vc")
             .put(RunContextKey.DID_RESOLVER, didResolver)
             .build();
 
@@ -86,7 +89,14 @@ public class BitstringStatusListCredentialInspector extends VCInspector {
 
       // proof
       probeCount++;
-      accumulator.add(new EmbeddedProofProbe().run(bslCred, ctx));
+      if (bslCred.getProofType() == ProofType.EXTERNAL) {
+        // The credential originally contained in a JWT, validate the jwt and external proof.
+        accumulator.add(new ExternalProofProbe(true).run(bslCred, ctx));
+      } else {
+        // The credential not contained in a jwt, must have an internal proof.
+        accumulator.add(new EmbeddedProofProbe().run(bslCred, ctx));
+      }
+      if (broken(accumulator)) return abort(ctx, accumulator, probeCount);
 
       // add the credential as a generated object
       accumulator.add(new ReportItems(Collections.emptyList(), List.of(bslCred)));
