@@ -18,12 +18,12 @@ public final class JsonParser extends PayloadParser {
 
 	@Override
 	public boolean supports(ResourceType type) {
-		return type == ResourceType.JSON;
+		return type == ResourceType.JSON || type == ResourceType.VC_JSON_LD || type == ResourceType.JSON_LD;
 	}
 
 	@Override
 	public Credential parse(Resource resource, RunContext ctx)  throws Exception {
-		checkTrue(resource.getType() == ResourceType.JSON);
+		checkTrue(resource.getType() == ResourceType.JSON || resource.getType() == ResourceType.VC_JSON_LD || resource.getType() == ResourceType.JSON_LD);
 		String json = resource.asByteSource().asCharSource(UTF_8).read();
 		JsonNode node = fromString(json, ctx);
 
