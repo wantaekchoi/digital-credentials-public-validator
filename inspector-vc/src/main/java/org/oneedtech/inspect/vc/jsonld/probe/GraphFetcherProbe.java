@@ -49,7 +49,7 @@ public class GraphFetcherProbe extends Probe<JsonNode> {
     private final Assertion assertion;
 
     public GraphFetcherProbe(Assertion assertion) {
-        super(ID);
+        super(ID, TITLE);
         this.assertion = assertion;
     }
 
@@ -204,6 +204,7 @@ public class GraphFetcherProbe extends Probe<JsonNode> {
     }
 
     public static final String ID = GraphFetcherProbe.class.getSimpleName();
+    public static final String TITLE = "Graph fetcher";
     public static final String URN_REGEX = "^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$'";
     protected final static Logger logger = LogManager.getLogger(GraphFetcherProbe.class);
 }

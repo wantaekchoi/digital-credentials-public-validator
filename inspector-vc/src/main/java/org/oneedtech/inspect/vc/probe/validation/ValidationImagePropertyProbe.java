@@ -27,7 +27,7 @@ public class ValidationImagePropertyProbe extends ValidationPropertyProbe {
     }
 
     public ValidationImagePropertyProbe(String credentialType, Validation validation, boolean fullValidate) {
-        super(ID, credentialType, validation, fullValidate);
+        super(ID, TITLE, credentialType, validation, fullValidate);
     }
 
     @Override
@@ -71,5 +71,6 @@ public class ValidationImagePropertyProbe extends ValidationPropertyProbe {
 
     private static final List<MimeType> allowedMimeTypes = List.of(MimeType.IMAGE_PNG, MimeType.IMAGE_SVG);
     public static final String ID = ValidationImagePropertyProbe.class.getSimpleName();
+    public static final String TITLE = "Image Property Validation";
 
 }

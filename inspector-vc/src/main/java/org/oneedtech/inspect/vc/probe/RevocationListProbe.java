@@ -25,7 +25,7 @@ import org.oneedtech.inspect.vc.util.JsonNodeUtil;
 public class RevocationListProbe extends Probe<Credential> {
 
   public RevocationListProbe() {
-    super(ID);
+    super(ID, TITLE);
   }
 
   @Override
@@ -114,4 +114,5 @@ public class RevocationListProbe extends Probe<Credential> {
   }
 
   public static final String ID = RevocationListProbe.class.getSimpleName();
+  public static final String TITLE = "Revocation List Validation";
 }

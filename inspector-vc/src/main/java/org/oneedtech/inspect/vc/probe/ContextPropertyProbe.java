@@ -20,7 +20,7 @@ public class ContextPropertyProbe extends StringValuePropertyProbe {
 	private final CredentialEnum type;
 
 	public ContextPropertyProbe(CredentialEnum type) {
-		super(ID, type.toString(), "@context");
+		super(ID, TITLE, type.toString(), "@context");
 		this.type = checkNotNull(type);
 		setValueValidations(this::validate);
 	}
@@ -76,4 +76,5 @@ public class ContextPropertyProbe extends StringValuePropertyProbe {
 	}
 
 	public static final String ID = ContextPropertyProbe.class.getSimpleName();
+	public static final String TITLE = "Context Property Validation";
 }

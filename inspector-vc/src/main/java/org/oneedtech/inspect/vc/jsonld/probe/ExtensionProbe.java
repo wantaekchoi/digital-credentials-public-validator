@@ -49,7 +49,7 @@ public class ExtensionProbe extends Probe<JsonNode> {
 	private final List<String> typesToTest;
 
 	public ExtensionProbe(String entryPath, List<String> typesToTest) {
-		super(ID, entryPath, typesToTest.stream().collect(joining()));
+		super(TITLE, ID, entryPath, typesToTest.stream().collect(joining()));
 		this.typesToTest = typesToTest;
 	}
 
@@ -164,5 +164,6 @@ public class ExtensionProbe extends Probe<JsonNode> {
     }
 
 	public static final String ID = ExtensionProbe.class.getSimpleName();
+	public static final String TITLE = "Extensions validation";
 	private static final String CONTEXT_URI_STRING = "https://w3id.org/openbadges/v2";
 }

@@ -1,7 +1,5 @@
 package org.oneedtech.inspect.vc.probe;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.security.KeyFactory;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.X509EncodedKeySpec;
@@ -16,7 +14,6 @@ import org.oneedtech.inspect.util.resource.UriResource;
 import org.oneedtech.inspect.vc.jsonld.JsonLdGeneratedObject;
 import org.oneedtech.inspect.vc.jsonld.probe.JsonLDCompactionProbe;
 import org.oneedtech.inspect.vc.resource.UriResourceFactory;
-import org.oneedtech.inspect.vc.util.CachingDocumentLoader;
 import org.oneedtech.inspect.vc.util.JsonNodeUtil;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -25,8 +22,6 @@ import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSObject;
 import com.nimbusds.jose.JWSVerifier;
 import com.nimbusds.jose.crypto.RSASSAVerifier;
-
-import foundation.identity.jsonld.ConfigurableDocumentLoader;
 
 /**
  * Recipient Verification probe for Open Badges 2.0
@@ -37,7 +32,7 @@ public class VerificationJWTProbe extends Probe<JsonLdGeneratedObject> {
     final String jwt;
 
     public VerificationJWTProbe(String jwt) {
-        super(ID);
+        super(ID, TITLE);
         this.jwt = jwt;
     }
 
@@ -110,5 +105,5 @@ public class VerificationJWTProbe extends Probe<JsonLdGeneratedObject> {
 
     private static final List<String> allowedTypes = List.of("id", "email", "url", "telephone");
     public static final String ID = VerificationJWTProbe.class.getSimpleName();
-
+    public static final String TITLE = "JWT Validation for Assertion Verification";
 }

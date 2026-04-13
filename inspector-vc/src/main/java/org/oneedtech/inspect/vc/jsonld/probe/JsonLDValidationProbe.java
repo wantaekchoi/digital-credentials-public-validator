@@ -20,7 +20,7 @@ public class JsonLDValidationProbe extends Probe<String> {
     }
 
     public JsonLDValidationProbe(DocumentLoader documentLoader) {
-        super();
+        super(ID, TITLE);
         this.documentLoader = documentLoader;
     }
 
@@ -37,4 +37,5 @@ public class JsonLDValidationProbe extends Probe<String> {
     }
 
 	public static final String ID = JsonLDValidationProbe.class.getSimpleName();
+	public static final String TITLE = "JSON-LD Validation";
 }

@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class IssuanceProbe extends Probe<Credential> {
 
 	public IssuanceProbe() {
-		super(ID);
+		super(ID, TITLE);
 	}
 
 	@Override
@@ -33,11 +33,12 @@ public class IssuanceProbe extends Probe<Credential> {
 					return fatal("The credential is not yet issued or valid (issuance date or validFrom is " + node.asText() + ").", ctx);
 				}
 			} catch (Exception e) {
-				return exception("Error while checking issuanceDate or ValidFrom: " + e.getMessage(), ctx.getResource());
+				return exception("Error while checking issuanceDate or validFrom: " + e.getMessage(), ctx.getResource());
 			}
 		}
 		return success(ctx);
 	}
 
 	public static final String ID = IssuanceProbe.class.getSimpleName();
+	public static final String TITLE = "Issuance Validation";
 }

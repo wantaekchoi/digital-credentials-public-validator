@@ -27,7 +27,7 @@ public class VerificationRecipientProbe extends Probe<Assertion> {
     final String profileId;
 
     public VerificationRecipientProbe(String profileId) {
-        super(ID);
+        super(ID, TITLE);
         this.profileId = profileId;
     }
 
@@ -91,5 +91,5 @@ public class VerificationRecipientProbe extends Probe<Assertion> {
 
     private static final List<String> allowedTypes = List.of("id", "email", "url", "telephone");
     public static final String ID = VerificationRecipientProbe.class.getSimpleName();
-
+    public static final String TITLE = "Recipient Verification";
 }

@@ -21,7 +21,7 @@ public class ValidationIssuerPropertyProbe extends ValidationPropertyProbe {
     }
 
     public ValidationIssuerPropertyProbe(String credentialType, Validation validation, boolean fullValidate) {
-        super(ID, credentialType, validation, fullValidate);
+        super(ID, TITLE, credentialType, validation, fullValidate);
     }
 
     @Override
@@ -41,5 +41,6 @@ public class ValidationIssuerPropertyProbe extends ValidationPropertyProbe {
     }
 
     public static final String ID = ValidationIssuerPropertyProbe.class.getSimpleName();
+    public static final String TITLE = "Issuer Property Validation";
 
 }

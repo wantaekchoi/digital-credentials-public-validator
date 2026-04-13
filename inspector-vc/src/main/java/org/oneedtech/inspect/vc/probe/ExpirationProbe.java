@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class ExpirationProbe extends Probe<Credential> {
 
 	public ExpirationProbe() {
-		super(ID);
+		super(ID, TITLE);
 	}
 
 	@Override
@@ -40,4 +40,5 @@ public class ExpirationProbe extends Probe<Credential> {
 	}
 
 	public static final String ID = ExpirationProbe.class.getSimpleName();
+	public static final String TITLE = "Expiration Validation";
 }

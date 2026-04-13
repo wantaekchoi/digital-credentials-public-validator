@@ -35,20 +35,20 @@ public class ValidationPropertyProbe extends PropertyProbe {
     protected final Validation validation;
     protected final boolean fullValidate;
 
-    public ValidationPropertyProbe(String credentialType, Validation validation) {
-        this(ID, credentialType, validation, true);
+    public ValidationPropertyProbe(String title, String credentialType, Validation validation) {
+        this(ID, title, credentialType, validation, true);
     }
 
-    public ValidationPropertyProbe(String id, String credentialType, Validation validation) {
-        this(id, credentialType, validation, true);
+    public ValidationPropertyProbe(String id, String title, String credentialType, Validation validation) {
+        this(id, title, credentialType, validation, true);
     }
 
-    public ValidationPropertyProbe(String credentialType, Validation validation, boolean fullValidate) {
-        this(ID, credentialType, validation, fullValidate);
+    public ValidationPropertyProbe(String title, String credentialType, Validation validation, boolean fullValidate) {
+        this(ID, title, credentialType, validation, fullValidate);
     }
 
-    public ValidationPropertyProbe(String id, String credentialType, Validation validation, boolean fullValidate) {
-        super(id, credentialType, validation.getName());
+    public ValidationPropertyProbe(String id, String title, String credentialType, Validation validation, boolean fullValidate) {
+        super(id, title, credentialType, validation.getName());
         this.validation = validation;
         this.fullValidate = fullValidate;
         setValidations(this::validate);
@@ -151,7 +151,7 @@ public class ValidationPropertyProbe extends PropertyProbe {
 
     private ReportItems validatePrerequisites(JsonNode node, RunContext ctx) {
         List<ReportItems> results = validation.getPrerequisites().stream()
-        .map(v -> ValidationPropertyProbeFactory.of(validation.getName(), v, validation.isFullValidate()))
+        .map(v -> ValidationPropertyProbeFactory.of(validation.getName(), TITLE, v, validation.isFullValidate()))
         .map(probe -> {
             try {
                 return probe.run(node, ctx);
@@ -167,7 +167,7 @@ public class ValidationPropertyProbe extends PropertyProbe {
     private ReportItems validateExpectedTypes(JsonNode node, RunContext ctx) {
         List<ReportItems> results = validation.getExpectedTypes().stream()
         .flatMap(type -> type.getValidations().stream())
-        .map(v -> ValidationPropertyProbeFactory.of(validation.getName(), v, validation.isFullValidate()))
+        .map(v -> ValidationPropertyProbeFactory.of(validation.getName(), TITLE, v, validation.isFullValidate()))
         .map(probe -> {
             try {
                 return probe.run(node, ctx);
@@ -180,4 +180,5 @@ public class ValidationPropertyProbe extends PropertyProbe {
     }
 
     public static final String ID = ValidationPropertyProbe.class.getSimpleName();
+    public static final String TITLE = "Validation of property value";
 }

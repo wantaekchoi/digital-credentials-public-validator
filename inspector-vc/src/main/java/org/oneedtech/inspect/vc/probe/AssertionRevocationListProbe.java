@@ -1,12 +1,9 @@
 package org.oneedtech.inspect.vc.probe;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.oneedtech.inspect.core.probe.Probe;
 import org.oneedtech.inspect.core.probe.RunContext;
@@ -16,13 +13,10 @@ import org.oneedtech.inspect.util.resource.UriResource;
 import org.oneedtech.inspect.vc.jsonld.JsonLdGeneratedObject;
 import org.oneedtech.inspect.vc.jsonld.probe.JsonLDCompactionProbe;
 import org.oneedtech.inspect.vc.resource.UriResourceFactory;
-import org.oneedtech.inspect.vc.util.CachingDocumentLoader;
 import org.oneedtech.inspect.vc.util.JsonNodeUtil;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import foundation.identity.jsonld.ConfigurableDocumentLoader;
 
 public class AssertionRevocationListProbe extends Probe<JsonLdGeneratedObject> {
     private final String assertionId;
@@ -33,7 +27,7 @@ public class AssertionRevocationListProbe extends Probe<JsonLdGeneratedObject> {
     }
 
     public AssertionRevocationListProbe(String assertionId, String propertyName) {
-        super(ID);
+        super(ID, TITLE);
         this.assertionId = assertionId;
         this.propertyName = propertyName;
     }
@@ -104,4 +98,5 @@ public class AssertionRevocationListProbe extends Probe<JsonLdGeneratedObject> {
     }
 
     public static final String ID = AssertionRevocationListProbe.class.getSimpleName();
+    public static final String TITLE = "Assertion Revocation List";
 }

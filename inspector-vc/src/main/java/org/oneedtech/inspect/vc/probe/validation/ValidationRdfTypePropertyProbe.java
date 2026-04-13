@@ -24,7 +24,7 @@ public class ValidationRdfTypePropertyProbe extends ValidationPropertyProbe {
     }
 
     public ValidationRdfTypePropertyProbe(String credentialType, Validation validation, boolean fullValidate) {
-        super(ID, credentialType, validation, fullValidate);
+        super(ID, TITLE, credentialType, validation, fullValidate);
     }
 
     @Override
@@ -66,4 +66,5 @@ public class ValidationRdfTypePropertyProbe extends ValidationPropertyProbe {
     }
 
     public static final String ID = ValidationRdfTypePropertyProbe.class.getSimpleName();
+    public static final String TITLE = "RDF Type Property Validation";
 }

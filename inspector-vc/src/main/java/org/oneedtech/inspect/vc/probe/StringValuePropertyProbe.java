@@ -12,8 +12,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class StringValuePropertyProbe extends PropertyProbe {
     private BiFunction<List<String>, RunContext, ReportItems> valueValidations;
 
-    public StringValuePropertyProbe(String id, String credentialType, String propertyName) {
-        super(id, credentialType, propertyName);
+    public StringValuePropertyProbe(String id, String title, String credentialType, String propertyName) {
+        super(id, title, credentialType, propertyName);
         this.valueValidations = this::defaultValidation;
         super.setValidations(this::nodeValidation);
     }

@@ -20,6 +20,10 @@ import org.oneedtech.inspect.vc.payload.PayloadParserFactory;
  */
 public class CredentialParseProbe extends Probe<Resource> {
 
+	public CredentialParseProbe() {
+		super(ID, TITLE);
+	}
+
 	@Override
 	public ReportItems run(Resource resource, RunContext context) throws Exception {
 
@@ -53,5 +57,6 @@ public class CredentialParseProbe extends Probe<Resource> {
 	}
 
 	public static final String ID = CredentialParseProbe.class.getSimpleName();
+	public static final String TITLE = "Extract credential data";
 
 }

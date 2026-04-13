@@ -33,7 +33,7 @@ public class VerificationDependenciesProbe extends Probe<JsonLdGeneratedObject> 
     }
 
     public VerificationDependenciesProbe(String assertionId, String propertyName) {
-        super(ID);
+        super(ID, TITLE);
         this.assertionId = assertionId;
         this.propertyName = propertyName;
     }
@@ -153,5 +153,6 @@ public class VerificationDependenciesProbe extends Probe<JsonLdGeneratedObject> 
 
 
     public static final String ID = VerificationDependenciesProbe.class.getSimpleName();
+    public static final String TITLE = "Verification Dependencies Validation";
 
 }

@@ -26,7 +26,7 @@ public class JsonLDCompactionProbe extends Probe<Credential> {
     private final String context;
 
     public JsonLDCompactionProbe(String context) {
-        super(ID);
+        super(ID, TITLE);
         this.context = context;
     }
 
@@ -66,4 +66,5 @@ public class JsonLDCompactionProbe extends Probe<Credential> {
     }
 
 	public static final String ID = JsonLDCompactionProbe.class.getSimpleName();
+	public static final String TITLE = "JSON-LD Compaction";
 }

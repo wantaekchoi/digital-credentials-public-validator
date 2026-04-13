@@ -12,14 +12,18 @@ public class PropertyProbe extends Probe<JsonNode> {
     private final String propertyName;
     private BiFunction<JsonNode, RunContext, ReportItems> validations;
 
-    public PropertyProbe(String id, String typeName, String propertyName) {
-        super(id, typeName, propertyName);
+    public PropertyProbe(String id, String title, String typeName, String propertyName) {
+        super(title, id, typeName, propertyName);
         this.propertyName = propertyName;
         this.validations = this::defaultValidation;
     }
 
     public void setValidations(BiFunction<JsonNode, RunContext, ReportItems> validations) {
         this.validations = validations;
+    }
+
+    protected String getPropertyName() {
+        return propertyName;
     }
 
     @Override

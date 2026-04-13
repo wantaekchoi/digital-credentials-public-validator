@@ -3,7 +3,6 @@ package org.oneedtech.inspect.vc.probe;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import org.oneedtech.inspect.core.probe.Probe;
@@ -11,11 +10,9 @@ import org.oneedtech.inspect.core.probe.RunContext;
 import org.oneedtech.inspect.core.probe.json.JsonSchemaProbe;
 import org.oneedtech.inspect.core.report.ReportItems;
 import org.oneedtech.inspect.schema.SchemaKey;
-import org.oneedtech.inspect.vc.VerifiableCredential;
 import org.oneedtech.inspect.vc.util.JsonNodeUtil;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 
 /**
  * Detect inline schemas in a credential and run them.
@@ -26,11 +23,11 @@ public class InlineJsonSchemaProbe extends Probe<JsonNode> {
 	private SchemaKey skip;
 
 	public InlineJsonSchemaProbe() {
-		super(ID);
+		super(ID, TITLE);
 	}
 
 	public InlineJsonSchemaProbe(SchemaKey skip) {
-		super(ID);
+		super(ID, TITLE);
 		this.skip = skip;
 	}
 
@@ -72,4 +69,5 @@ public class InlineJsonSchemaProbe extends Probe<JsonNode> {
 	}
 
 	public static final String ID = InlineJsonSchemaProbe.class.getSimpleName();
+	public static final String TITLE = "Inline JSON Schema Validation";
 }

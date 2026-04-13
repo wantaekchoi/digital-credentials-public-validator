@@ -29,7 +29,7 @@ public class CredentialSubjectProbe extends Probe<JsonNode> {
 
   public CredentialSubjectProbe(
       String requiredType, boolean achivementRequired, boolean identifierRequired) {
-    super(ID);
+    super(ID, TITLE);
     this.requiredType = requiredType;
     this.achivementRequired = achivementRequired;
     this.identifierRequired = identifierRequired;
@@ -138,4 +138,5 @@ public class CredentialSubjectProbe extends Probe<JsonNode> {
   }
 
   public static final String ID = CredentialSubjectProbe.class.getSimpleName();
+  public static final String TITLE = "Verification of credential subject";
 }

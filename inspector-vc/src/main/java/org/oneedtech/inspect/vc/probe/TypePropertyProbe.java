@@ -18,7 +18,7 @@ public class TypePropertyProbe extends StringValuePropertyProbe {
 	private final CredentialEnum expected;
 
 	public TypePropertyProbe(CredentialEnum expected) {
-		super(ID, expected.toString(), "type");
+		super(ID, TITLE, expected.toString(), "type");
 		this.expected = checkNotNull(expected);
 		this.setValueValidations(this::validate);
 	}
@@ -60,4 +60,5 @@ public class TypePropertyProbe extends StringValuePropertyProbe {
 	}
 
 	public static final String ID = TypePropertyProbe.class.getSimpleName();
+	public static final String TITLE = "Type Property Validation";
 }

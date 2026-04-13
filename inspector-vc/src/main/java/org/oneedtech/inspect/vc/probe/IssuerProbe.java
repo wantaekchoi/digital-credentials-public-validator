@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public class IssuerProbe extends Probe<JsonNode> {
     public IssuerProbe() {
-		super(ID);
+		super(ID, TITLE);
 	}
 
 	@Override
@@ -62,5 +62,6 @@ public class IssuerProbe extends Probe<JsonNode> {
     }
 
     public static final String ID = IssuerProbe.class.getSimpleName();
+    public static final String TITLE = "Issuer Validation";
 
 }

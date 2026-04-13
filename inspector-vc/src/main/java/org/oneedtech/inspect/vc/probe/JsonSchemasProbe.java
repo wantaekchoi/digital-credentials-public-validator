@@ -16,6 +16,7 @@ public class JsonSchemasProbe extends Probe<VerifiableCredential> {
   private SchemaKey key;
 
   public JsonSchemasProbe(SchemaKey key) {
+    super(TITLE);
     this.key = key;
   }
 
@@ -59,4 +60,6 @@ public class JsonSchemasProbe extends Probe<VerifiableCredential> {
 
     return report;
   }
+
+  public static final String TITLE = "JSON Schema Validation";
 }

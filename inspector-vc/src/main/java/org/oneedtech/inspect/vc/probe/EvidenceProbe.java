@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public class EvidenceProbe extends Probe<JsonNode> {
     public EvidenceProbe() {
-		super(ID);
+		super(ID, TITLE);
 	}
 
 	@Override
@@ -34,5 +34,5 @@ public class EvidenceProbe extends Probe<JsonNode> {
     }
 
     public static final String ID = EvidenceProbe.class.getSimpleName();
-
+    public static final String TITLE = "Evidence Type Validation";
 }

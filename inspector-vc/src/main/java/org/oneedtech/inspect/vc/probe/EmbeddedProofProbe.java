@@ -41,7 +41,7 @@ public class EmbeddedProofProbe extends Probe<VerifiableCredential> {
   private MulticodecDecoder multicodecDecoder;
 
   public EmbeddedProofProbe() {
-    super(ID);
+    super(ID, TITLE);
     this.multicodecDecoder =
         MulticodecDecoder.getInstance(
             KeyCodec.ED25519_PUBLIC_KEY, KeyCodec.P256_PUBLIC_KEY, KeyCodec.P384_PUBLIC_KEY);
@@ -280,4 +280,5 @@ public class EmbeddedProofProbe extends Probe<VerifiableCredential> {
   }
 
   public static final String ID = EmbeddedProofProbe.class.getSimpleName();
+  public static final String TITLE = "Embedded Proof Verification";
 }

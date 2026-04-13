@@ -27,6 +27,10 @@ import com.fasterxml.jackson.databind.JsonNode;
  */
 public class BitstringStatusListProbe extends Probe<JsonNode> {
 
+  public BitstringStatusListProbe() {
+    super(ID, TITLE);
+  }
+
   @Override
   public ReportItems run(JsonNode credentialStatus, RunContext ctx) {
     // 2. Let minimumNumberOfEntries be 131,072 unless a different lower bound is established by a
@@ -171,4 +175,5 @@ public class BitstringStatusListProbe extends Probe<JsonNode> {
   }
 
   public static final String ID = BitstringStatusListProbe.class.getSimpleName();
+  public static final String TITLE = "Bitstring Status List Validation";
 }

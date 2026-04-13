@@ -56,7 +56,7 @@ public class ExternalProofProbe extends Probe<VerifiableCredential> {
 	private final boolean allowKidAsHint;
 
 	public ExternalProofProbe(boolean allowKidAsHint) {
-		super(ID);
+		super(ID, TITLE);
 		this.allowKidAsHint = allowKidAsHint;
 	}
 
@@ -217,6 +217,7 @@ public class ExternalProofProbe extends Probe<VerifiableCredential> {
 	}
 
 	public static final String ID = ExternalProofProbe.class.getSimpleName();
+	public static final String TITLE = "Verification of external proof";
 
 	private boolean kidCanBeUsedAsHint(String kid, VerifiableCredential crd) {
 		if(!allowKidAsHint) return false;
