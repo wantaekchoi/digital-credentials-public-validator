@@ -100,7 +100,7 @@ public class VerificationJWTProbe extends Probe<JsonLdGeneratedObject> {
         } catch (JOSEException e) {
             return fatal("Signature for node " + assertionNode.get("id") + " failed verification " + e.getLocalizedMessage(), ctx);
         }
-        return success(ctx);
+        return success("JWT signature verification succeeded for node " + assertionNode.get("id"), ctx);
     }
 
     private static final List<String> allowedTypes = List.of("id", "email", "url", "telephone");

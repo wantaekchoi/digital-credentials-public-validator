@@ -36,7 +36,7 @@ public class ExpirationProbe extends Probe<Credential> {
 				return exception("Error while checking expirationDate or validUntil: " + e.getMessage(), ctx.getResource());
 			}
 		}
-		return success(ctx);
+		return success("Credential is not expired.", ctx);
 	}
 
 	public static final String ID = ExpirationProbe.class.getSimpleName();

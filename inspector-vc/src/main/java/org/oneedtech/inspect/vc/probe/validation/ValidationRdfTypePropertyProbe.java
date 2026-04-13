@@ -41,7 +41,7 @@ public class ValidationRdfTypePropertyProbe extends ValidationPropertyProbe {
 
         // if we're not doing a full validation and it's not and id field, pass
         if (!fullValidate && !validation.getName().equals("id")) {
-            return success(ctx);
+            return success("Optional RDF type property " + validation.getName() + " not present in " + node.toPrettyString(), ctx);
         }
         return error("Required property " + validation.getName() + " not present in " + node.toPrettyString(), ctx);
     }
@@ -62,7 +62,7 @@ public class ValidationRdfTypePropertyProbe extends ValidationPropertyProbe {
                 ));
             }
         }
-        return new ReportItems(List.of(result, success(ctx)));
+        return new ReportItems(List.of(result, success("RDF type property " + validation.getName() + " is valid.", ctx)));
     }
 
     public static final String ID = ValidationRdfTypePropertyProbe.class.getSimpleName();

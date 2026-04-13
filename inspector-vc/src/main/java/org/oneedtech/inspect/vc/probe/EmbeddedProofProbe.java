@@ -239,7 +239,7 @@ public class EmbeddedProofProbe extends Probe<VerifiableCredential> {
       return fatal("Embedded proof verification failed: " + e.getMessage(), ctx);
     }
 
-    return success(ctx);
+    return success("Embedded proof verification completed successfully", ctx);
   }
 
   private LdVerifier<?> getVerifier(

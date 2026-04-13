@@ -33,7 +33,7 @@ public class ValidationImagePropertyProbe extends ValidationPropertyProbe {
     @Override
     protected ReportItems reportForNonExistentProperty(JsonNode node, RunContext ctx) {
         // Could not load and validate image in node
-        return success(ctx);
+        return success("Could not load and validate image in node " + node, ctx);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class ValidationImagePropertyProbe extends ValidationPropertyProbe {
                 return fatal(t.getMessage(), ctx);
             }
         }
-        return success(ctx);
+        return success("Image in node " + node + " is valid.", ctx);
     }
 
     private static final List<MimeType> allowedMimeTypes = List.of(MimeType.IMAGE_PNG, MimeType.IMAGE_SVG);

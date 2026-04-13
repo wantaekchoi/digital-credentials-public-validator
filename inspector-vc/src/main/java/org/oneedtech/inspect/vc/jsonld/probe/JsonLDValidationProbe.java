@@ -30,7 +30,7 @@ public class JsonLDValidationProbe extends Probe<String> {
         jsonLd.setDocumentLoader(documentLoader);
         try {
             Validation.validate(jsonLd);
-            return success(this, ctx);
+            return success("JSON-LD validation completed successfully", ctx);
         } catch (Exception e) {
             return error("Error while validation JSON LD object: " + e.getMessage(), ctx);
         }

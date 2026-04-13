@@ -41,6 +41,6 @@ public class PropertyProbe extends Probe<JsonNode> {
     }
 
     private ReportItems defaultValidation(JsonNode node, RunContext ctx) {
-        return success(ctx);
+        return success("Property " + propertyName + " is valid.", ctx);
     }
 }

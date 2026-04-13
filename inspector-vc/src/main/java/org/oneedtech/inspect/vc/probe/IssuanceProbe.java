@@ -36,7 +36,7 @@ public class IssuanceProbe extends Probe<Credential> {
 				return exception("Error while checking issuanceDate or validFrom: " + e.getMessage(), ctx.getResource());
 			}
 		}
-		return success(ctx);
+		return success("Credential has a valid issuance date / valid from.", ctx);
 	}
 
 	public static final String ID = IssuanceProbe.class.getSimpleName();

@@ -49,7 +49,7 @@ public class CredentialParseProbe extends Probe<Resource> {
 
 			Credential crd = PayloadParserFactory.of(resource).parse(resource, context);
 			context.addGeneratedObject(crd);
-			return success(this, context);
+			return success("Credential parsing completed successfully", context);
 
 		} catch (Exception e) {
 			return fatal("Error while parsing credential: " + e.getMessage(), context);

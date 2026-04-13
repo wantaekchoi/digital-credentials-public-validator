@@ -99,7 +99,7 @@ public class CredentialSubjectProbe extends Probe<JsonNode> {
         return error("source in credentialSubject is not of type \"Profile\"", ctx);
       }
     }
-    return success(ctx);
+    return success("Credential subject validation completed successfully", ctx);
   }
 
   protected Optional<ReportItems> checkAchievement(JsonNode achievement, RunContext ctx) {

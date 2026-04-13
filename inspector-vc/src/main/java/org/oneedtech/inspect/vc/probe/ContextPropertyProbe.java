@@ -52,7 +52,7 @@ public class ContextPropertyProbe extends StringValuePropertyProbe {
 			}
 		}
 
-		return success(ctx);
+		return success("Context property validation completed successfully", ctx);
 	}
 
 	private boolean contains(String uri, String nodeValue) {

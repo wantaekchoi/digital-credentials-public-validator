@@ -56,7 +56,7 @@ public class AssertionRevocationListProbe extends Probe<JsonLdGeneratedObject> {
         JsonNode revocationListIdNode = issuerNode.get("revocationList");
         if (revocationListIdNode == null) {
             // "Assertion is not revoked. Issuer has no revocation list"
-            return success(ctx);
+            return success("Assertion is not revoked. Issuer has no revocation list", ctx);
         }
 
         UriResource revocationListUriResource = uriResourceFactory.of(revocationListIdNode.asText().strip());
@@ -81,7 +81,7 @@ public class AssertionRevocationListProbe extends Probe<JsonLdGeneratedObject> {
             String reason = reasonNode.isPresent() ? " with reason " + reasonNode.get().asText().strip() : "";
             return error("Assertion " + assertionId + " has been revoked in RevocationList " + revocationListIdNode.asText().strip() + reason, ctx);
         }
-        return success(ctx);
+        return success("Assertion " + assertionId + " is not revoked", ctx);
     }
 
     /**

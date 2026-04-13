@@ -28,9 +28,10 @@ public class EvidenceProbe extends Probe<JsonNode> {
                     return error("evidence is not of type \"Evidence\"", ctx);
                 }
             }
+            return success("Evidence Type validation completed successfully", ctx);
         }
+        return success("No evidence node found", ctx); // error reported by schema
 
-        return success(ctx);
     }
 
     public static final String ID = EvidenceProbe.class.getSimpleName();

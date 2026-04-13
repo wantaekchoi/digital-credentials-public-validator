@@ -30,7 +30,7 @@ public class ValidationIssuerPropertyProbe extends ValidationPropertyProbe {
             return buildResponse("Issuer Profile " + node.toString() + " not hosted with HTTP-based identifier."  +
                 "Many platforms can only handle HTTP(s)-hosted issuers.", ctx);
         }
-        return success(ctx);
+        return success("Issuer Profile " + node.toString() + " is valid.", ctx);
     }
 
     private ReportItems buildResponse(String msg, RunContext ctx) {

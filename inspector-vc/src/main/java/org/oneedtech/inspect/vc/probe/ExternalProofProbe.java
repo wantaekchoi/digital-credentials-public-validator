@@ -67,7 +67,7 @@ public class ExternalProofProbe extends Probe<VerifiableCredential> {
 		} catch (Exception e) {
 			return fatal("Error verifying jwt signature: " + e.getMessage() + (e.getCause() != null ? ". Reason: " + e.getCause().getMessage() : ""), ctx);
 		}
-		return success(ctx);
+		return success("External Proof verification completed successfully", ctx);
 	}
 
 	private void verifySignature(VerifiableCredential crd, RunContext ctx) throws Exception {

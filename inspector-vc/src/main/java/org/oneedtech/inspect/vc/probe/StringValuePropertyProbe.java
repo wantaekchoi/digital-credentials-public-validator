@@ -28,7 +28,7 @@ public class StringValuePropertyProbe extends PropertyProbe {
 }
 
     private ReportItems defaultValidation(List<String> nodeValues, RunContext ctx) {
-        return success(ctx);
+        return success("Property " + super.getPropertyName() + " has valid string values.", ctx);
     }
 
 

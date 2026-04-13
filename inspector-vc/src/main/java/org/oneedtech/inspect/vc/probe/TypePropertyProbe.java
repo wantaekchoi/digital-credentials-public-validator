@@ -34,14 +34,14 @@ public class TypePropertyProbe extends StringValuePropertyProbe {
 		if (expected.isAllowedTypeValuesRequired()) {
 			List<String> allowedValues = expected.getAllowedTypeValues();
 			if (allowedValues.isEmpty()) {
-				return fatal("The type property is invalid", ctx);
+				return fatal("The " + super.getPropertyName() + " type property is invalid", ctx);
 			}
 			if (!values.stream().anyMatch(v -> allowedValues.contains(v))) {
 				return fatal(formatMessage(values), ctx);
 			}
 		}
 
-		return success(ctx);
+		return success("Property " + super.getPropertyName() + " has valid type values.", ctx);
 	}
 
 	private String formatMessage(List<String> values) {

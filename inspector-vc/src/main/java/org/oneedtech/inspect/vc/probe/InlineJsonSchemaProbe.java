@@ -38,7 +38,7 @@ public class InlineJsonSchemaProbe extends Probe<JsonNode> {
 
 		//note - we don't get deep nested ones in e.g. EndorsementCredential
 		JsonNode credentialSchemaNode = root.get("credentialSchema");
-		if(credentialSchemaNode == null) return success(ctx);
+		if(credentialSchemaNode == null) return success("No credentialSchema node found", ctx);
 
 		List<JsonNode> schemas = JsonNodeUtil.asNodeList(credentialSchemaNode);
 

@@ -122,7 +122,7 @@ public class GraphFetcherProbe extends Probe<JsonNode> {
             }
 
         }
-        return success(ctx);
+        return success("Graph fetch completed successfully", ctx);
     }
 
     private ReportItems fetchNode(RunContext ctx, ReportItems result, JsonNode idNode)

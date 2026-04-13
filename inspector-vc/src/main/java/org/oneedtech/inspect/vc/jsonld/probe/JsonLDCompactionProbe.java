@@ -48,7 +48,7 @@ public class JsonLDCompactionProbe extends Probe<Credential> {
               return warning("Node fetched from source " + crd.getResource().getID() + " declared its id as " + compactedObject.get("id").toString(), ctx);
           }
 
-          return success(this, ctx);
+          return success("JSON-LD compaction completed successfully", ctx);
       } catch (Exception e) {
         return fatal("Error while compacting JSON-LD: " + crd.getJson() + ". Caused by: " + e.getMessage(), ctx);
       }

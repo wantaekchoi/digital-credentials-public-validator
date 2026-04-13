@@ -70,7 +70,7 @@ public class VerificationRecipientProbe extends Probe<Assertion> {
             return new ReportItems(List.of(warnings, error("Profile " + profileId + " identifier " + currentTypes + " of type " + typeNode.toString()  + " did not match assertion " +  assertion.getId() + " recipient value " + identity, ctx)));
         }
 
-        return new ReportItems(List.of(warnings, success(ctx)));
+        return new ReportItems(List.of(warnings, success("Recipient verification successful.", ctx)));
     }
 
     private boolean hashMatch(String possibleId, String identity, String salt) throws Exception {

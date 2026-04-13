@@ -58,7 +58,7 @@ public class IssuerProbe extends Probe<JsonNode> {
             }
         }
 
-        return success(ctx);
+        return success("Issuer has valid types and identifiers", ctx);
     }
 
     public static final String ID = IssuerProbe.class.getSimpleName();

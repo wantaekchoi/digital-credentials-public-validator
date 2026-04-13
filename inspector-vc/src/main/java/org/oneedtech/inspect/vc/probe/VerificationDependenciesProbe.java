@@ -121,7 +121,7 @@ public class VerificationDependenciesProbe extends Probe<JsonLdGeneratedObject> 
                 return error("Assertion " + assertionId + " not hosted in allowed origins " + allowedOrigins, ctx);
             }
         }
-        return success(ctx);
+        return success("Verification dependencies are valid.", ctx);
     }
 
     private JsonNode getDefaultVerificationPolicy(JsonNode issuerNode, ObjectMapper mapper) throws URISyntaxException {

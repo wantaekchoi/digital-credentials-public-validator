@@ -60,7 +60,7 @@ public class ValidationPropertyProbe extends PropertyProbe {
             return error("Required property " + validation.getName() + " not present in " + node.toPrettyString(), ctx);
         } else {
             // optional property or not doing full validation
-            return success(ctx);
+            return success("Optional property " + validation.getName() + " not present in " + node.toPrettyString(), ctx);
         }
     }
 
@@ -146,7 +146,7 @@ public class ValidationPropertyProbe extends PropertyProbe {
             return fatal(t.getMessage(), ctx);
         }
 
-        return result.size() > 0 ? result : success(ctx);
+        return result.size() > 0 ? result : success("All properties in node " + node.toPrettyString() + " are valid.", ctx);
     }
 
     private ReportItems validatePrerequisites(JsonNode node, RunContext ctx) {

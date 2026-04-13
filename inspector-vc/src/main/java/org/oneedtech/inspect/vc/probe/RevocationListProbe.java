@@ -60,7 +60,7 @@ public class RevocationListProbe extends Probe<Credential> {
         }
       }
     }
-    return success(ctx);
+    return success("Credential is not revoked.", ctx);
   }
 
   private ReportItems checkStatus(JsonNode credentialStatus, String credentialId, RunContext ctx)

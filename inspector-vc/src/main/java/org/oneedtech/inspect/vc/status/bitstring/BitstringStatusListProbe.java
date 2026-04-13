@@ -148,7 +148,7 @@ public class BitstringStatusListProbe extends Probe<JsonNode> {
       if ((byteValue & bitMask) != 0) {
         return fatal("Credential has been revoked", ctx);
       }
-      return success(ctx);
+      return success("Credential is not revoked.", ctx);
 
     } catch (IOException e) {
       return fatal("Error expanding bitstring:" + e.getLocalizedMessage(), ctx);
