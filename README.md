@@ -1,5 +1,9 @@
 # Public Validator for Open Badges
 
+> [!INFO] Live Server
+> A deployment of this project is available at https://vc.1edtech.org.
+> verifybadge.org is not owned or maintained by 1EdTech.
+
 Public Validator for Open Badges is a webapp designed to verify the validity of Open Badges based on a variety of input sources and present a useful interface for accessing their properties and validation information. HTTP and APIs are provided.
 
 Public Validator for Open Badges is released by [1EdTech](https://www.1edtech.org).
