@@ -1,6 +1,6 @@
 # Public Validator for Open Badges
 
-> [!INFO] Live Server
+> ## Live Server
 > A deployment of this project is available at https://vc.1edtech.org.
 > verifybadge.org is not owned or maintained by 1EdTech.
 
