@@ -39,6 +39,7 @@
 		<dependency>
 			<groupId>org.1edtech</groupId>
 			<artifactId>inspector-tcp-vc</artifactId>
+			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
