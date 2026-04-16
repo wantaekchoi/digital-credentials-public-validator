@@ -30,7 +30,11 @@
 			},
 			"supportsCertification": false,
 			"submissionTypes": ["upload","uri"],
-			"uriMimeTypes": ["application/json","application/ld+json","application/vc+ld+json","text/jwt","text/plain","image/svg+xml","image/png"]
+			"uriResourceTypes": ["JSON", "JSON_LD", "VC_JSON_LD", "JWT", "SVG", "PNG"],
+			"customResourceTypes": [{
+				"name": "JWT",
+				"mimeType": "application/octet-stream"
+			}]
 		},
 		{
 			"id": "OB20Inspector",
@@ -42,7 +46,7 @@
 			"group": "vc",
 			"supportsCertification": false,
 			"submissionTypes": ["upload","uri"],
-			"uriMimeTypes": ["application/json","application/ld+json","image/svg+xml","image/png"]
+			"uriResourceTypes": ["JSON", "JSON_LD", "SVG", "PNG"]
 		},
 		{
 			"id": "CLR20Inspector",
@@ -67,7 +71,11 @@
 			},
 			"supportsCertification": false,
 			"submissionTypes": ["upload","uri"],
-			"uriMimeTypes": ["application/json","application/ld+json","application/vc+ld+json","text/jwt","text/plain","image/svg+xml","image/png"]
+			"uriResourceTypes": ["JSON", "JSON_LD", "VC_JSON_LD", "JWT", "SVG", "PNG"],
+			"customResourceTypes": [{
+				"name": "JWT",
+				"mimeType": "application/octet-stream"
+			}]
 		}
 	]
 
