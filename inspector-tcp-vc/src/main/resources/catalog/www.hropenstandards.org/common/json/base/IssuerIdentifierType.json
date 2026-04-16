@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "version": "4.5.0",
+    "title": "IssuerIdentifierType",
+    "description": "An identifier is a character string used to uniquely identify one instance of an object within an identification scheme that is managed by an agency. Use this type when the list or values are controlled by an external entity, the list or values are public and could be referenced or validated. Note that this definition of the  extends the base identifier type with the issuer party identifier.",
+    "type": "object",
+    "properties": {
+        "issuerPartyId": { 
+            "description": "The identification of the party that issued the identifier.",
+            "$ref": "IdentifierType.json#" 
+        }
+    },
+	"allOf": [
+		{
+			"$ref": "IdentifierType.json"
+		}
+	]
+}

@@ -94,7 +94,7 @@ public class BitstringStatusListCredentialInspector extends VCInspector {
         accumulator.add(new ExternalProofProbe(true).run(bslCred, ctx));
       } else {
         // The credential not contained in a jwt, must have an internal proof.
-        accumulator.add(new EmbeddedProofProbe().run(bslCred, ctx));
+        accumulator.add(new EmbeddedProofProbe(type).run(bslCred, ctx));
       }
       if (broken(accumulator)) return abort(ctx, accumulator, probeCount);
 

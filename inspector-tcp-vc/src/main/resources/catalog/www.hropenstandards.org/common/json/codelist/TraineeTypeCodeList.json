@@ -1,0 +1,16 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"version": "4.5.0",
+	"title": "TraineeTypeCodeList",
+	"description": "Trainee type code list.",
+	"enum": [
+		"Intern",
+		"Extern",
+		"Apprentice"
+	],
+	"enumNames": [
+		"A worker trainee that works for a short-term period to gain experience in a specific field. Typically for students or recent graduates, often tied to school credit or career exploration. The trainee may be paid or unpaid.",
+		"A worker trainee that works for a short-term, observation-based experience, usually unpaid and often based on academic credit. Externships are typically short-term and more focused on observation of professionals at work to gain insight into a career or industry.",
+		"A worker trainee enrolled in a structured, often paid, program to learn a trade or skill. Employment is tied to training, often with the intention to prepare for permanent employment."
+	]
+}

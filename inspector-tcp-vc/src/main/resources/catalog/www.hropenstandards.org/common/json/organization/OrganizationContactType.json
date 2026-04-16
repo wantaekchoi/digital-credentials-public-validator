@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "version": "4.5.0",
+    "title": "OrganizationContactType",
+    "description": "Contains information to identify a contact person associated with an organization",
+    "type": "object",
+    "allOf": [
+		{
+			"$ref": "../person/SpecifiedPersonType.json#"
+		}
+    ],
+    "properties": {
+        "positionTitle": {
+            "description": "The position title for the contact of the organization.",
+            "type": "string"
+        }
+    }    
+}

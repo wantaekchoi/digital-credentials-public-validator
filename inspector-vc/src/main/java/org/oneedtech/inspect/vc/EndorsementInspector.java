@@ -148,7 +148,7 @@ public class EndorsementInspector extends VCInspector implements SubInspector {
         accumulator.add(new ExternalProofProbe(false).run(endorsement, ctx));
       } else {
         // The credential not contained in a jwt, must have an internal proof.
-        accumulator.add(new EmbeddedProofProbe().run(endorsement, ctx));
+        accumulator.add(new EmbeddedProofProbe(type).run(endorsement, ctx));
       }
       if (broken(accumulator)) return abort(ctx, accumulator, probeCount);
 
@@ -246,7 +246,7 @@ public class EndorsementInspector extends VCInspector implements SubInspector {
         // The credential originally contained in a JWT, validate the jwt and external proof.
         accumulator.add(new ExternalProofProbe(false).run(endorsement, ctx));
       } else {
-        accumulator.add(new EmbeddedProofProbe().run(endorsement, ctx));
+        accumulator.add(new EmbeddedProofProbe(type).run(endorsement, ctx));
       }
       if (broken(accumulator)) return abort(ctx, accumulator, probeCount);
 

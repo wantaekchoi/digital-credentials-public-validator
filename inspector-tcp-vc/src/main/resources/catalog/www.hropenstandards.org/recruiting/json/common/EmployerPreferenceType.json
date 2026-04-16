@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "version": "4.4",
+    "title": "EmployerPreferenceType",
+    "description": "Contains a collection of information about a candidate's preferences in an ideal employer or company.",
+    "type": "object",
+    "properties": {
+        "organizationNames": {
+            "description": "A list of organization names which are preferred to the candidate.",
+            "$ref": "../../../common/json/base/StringTypeArray.json#"
+        },
+        "organizationTypes": {
+            "description": "A list of organization types (such as public, non-profit) which are preferred to the candidate.",
+            "$ref": "../../../common/json/base/StringTypeArray.json#"
+        },
+        "industryCodes": {
+            "description": "A list of industry codes which are preferred to the candidate.",
+            "type": "array",
+            "items": { "$ref": "../../../common/json/base/IdentifierType.json#" }
+        },
+        "headcountRange": {
+            "description": "A measure of size of a company based on the number of employees (headcount). This range is inclusive of the minimum and maximum number.",
+            "type": "object",
+            "properties": {
+                "minimum": { "type": "number" },
+                "maximum": { "type": "number" }
+            },
+            "minProperties": 1
+        },
+        "descriptions": {
+            "description": "A list of text descriptions of the candidate preferences for an employer.",
+            "$ref": "../../../common/json/base/StringTypeArray.json#"
+        }
+    }
+}

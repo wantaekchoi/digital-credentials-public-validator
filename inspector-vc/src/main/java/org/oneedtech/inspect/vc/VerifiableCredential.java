@@ -1,8 +1,11 @@
 package org.oneedtech.inspect.vc;
 
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.AchievementCredential;
+import static org.oneedtech.inspect.vc.VerifiableCredential.Type.BitstringStatusListCredential;
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.ClrCredential;
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.EndorsementCredential;
+import static org.oneedtech.inspect.vc.VerifiableCredential.Type.OpenBadgeCredential;
+import static org.oneedtech.inspect.vc.VerifiableCredential.Type.TcpVc;
 import static org.oneedtech.inspect.vc.VerifiableCredential.Type.VerifiablePresentation;
 
 import java.util.Collections;
@@ -58,13 +61,27 @@ public class VerifiableCredential extends Credential {
   private static final Map<CredentialEnum, SchemaKey> schemas =
       new ImmutableMap.Builder<CredentialEnum, SchemaKey>()
           .put(AchievementCredential, Catalog.OB_30_ANY_ACHIEVEMENTCREDENTIAL_JSON)
+          .put(OpenBadgeCredential, Catalog.OB_30_ANY_ACHIEVEMENTCREDENTIAL_JSON)
           .put(ClrCredential, Catalog.CLR_20_ANY_CLRCREDENTIAL_JSON)
           .put(VerifiablePresentation, Catalog.CLR_20_ANY_CLRCREDENTIAL_JSON)
           .put(EndorsementCredential, Catalog.OB_30_ANY_ENDORSEMENTCREDENTIAL_JSON)
           .build();
 
+  private static final Map<CredentialEnum, List<String>> proofTypes =
+      new ImmutableMap.Builder<CredentialEnum, List<String>>()
+      .put(AchievementCredential, List.of("Ed25519Signature2020", "DataIntegrityProof"))
+      .put(OpenBadgeCredential, List.of("Ed25519Signature2020", "DataIntegrityProof"))
+      .put(ClrCredential, List.of("Ed25519Signature2020", "DataIntegrityProof"))
+      .put(VerifiablePresentation, List.of("Ed25519Signature2020", "DataIntegrityProof", "RsaSignature2018"))
+      .put(EndorsementCredential, List.of("Ed25519Signature2020", "DataIntegrityProof", "RsaSignature2018"))
+      .put(BitstringStatusListCredential, List.of("Ed25519Signature2020", "DataIntegrityProof"))
+      .put(TcpVc, List.of("Ed25519Signature2020", "DataIntegrityProof", "RsaSignature2018"))
+      .build();
+
   public static final String JSONLD_CONTEXT_W3C_CREDENTIALS_V2 =
       "https://www.w3.org/ns/credentials/v2";
+  public static final String JSONLD_CONTEXT_W3C_CREDENTIALS_V1 =
+      "https://www.w3.org/2018/credentials/v1";
 
   private static final Map<Set<VerifiableCredential.Type>, List<String>> contextMap =
       new ImmutableMap.Builder<Set<VerifiableCredential.Type>, List<String>>()
@@ -80,8 +97,11 @@ public class VerifiableCredential extends Credential {
                   "https://purl.imsglobal.org/spec/clr/v2p0/context-2.0.1.json",
                   "https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.3.json"))
           .put(
-              Set.of(Type.BitstringStatusListCredential),
+              Set.of(BitstringStatusListCredential),
               List.of(JSONLD_CONTEXT_W3C_CREDENTIALS_V2))
+          .put(
+              Set.of(TcpVc),
+              List.of(JSONLD_CONTEXT_W3C_CREDENTIALS_V1, "http://schema.hropenstandards.org/4.5/recruiting/json/VerifiableCredentialLER-RSType.json"))
           .build();
 
   private static final Map<String, List<String>> contextAliasesMap =
@@ -121,6 +141,7 @@ public class VerifiableCredential extends Credential {
     VerifiableCredential(
         List.of("VerifiableCredential")), // this is an underspecifier in our context
     BitstringStatusListCredential(List.of("BitstringStatusListCredential")),
+    TcpVc(List.of("LER-RS VC")),
     Unknown(Collections.emptyList());
 
     private final List<String> allowedTypeValues;
@@ -143,6 +164,8 @@ public class VerifiableCredential extends Credential {
             return EndorsementCredential;
           } else if (value.equals("BitstringStatusListCredential")) {
             return BitstringStatusListCredential;
+          } else if (value.equals("LER-RS VC")) {
+            return TcpVc;
           }
         }
       }
@@ -182,6 +205,11 @@ public class VerifiableCredential extends Credential {
     public Map<String, List<String>> getContextVersionPatterns() {
       return contextVersioningPatternMap;
     }
+
+    @Override
+    public List<String> getSupportedEmbeddedProofTypes() {
+      return proofTypes.get(this);
+    }
   }
 
   public enum ProofType {
@@ -209,13 +237,21 @@ public class VerifiableCredential extends Credential {
       this.expirationDateField = expirationDateField;
     }
 
-    static VCVersion of(JsonNode context) {
+    public static VCVersion of(JsonNode context) {
       if (JsonNodeUtil.asNodeList(context).stream()
           .anyMatch(
               node -> node.isTextual() && node.asText().equals(JSONLD_CONTEXT_W3C_CREDENTIALS_V2)))
         return VCDMv2p0;
 
       return VCDMv1p1;
+    }
+
+    public String getIssuanceDateField() {
+      return issuanceDateField;
+    }
+
+    public String getExpirationDateField() {
+      return expirationDateField;
     }
   }
 

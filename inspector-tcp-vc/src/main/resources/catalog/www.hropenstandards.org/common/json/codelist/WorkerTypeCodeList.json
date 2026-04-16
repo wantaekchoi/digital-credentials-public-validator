@@ -1,0 +1,18 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"version": "4.5.0",
+	"title": "WorkerTypeCodeList",
+	"description": "Worker type code list.",
+	"enum": [
+		"Employee",
+		"VendorWorker",
+		"IndependentContractor",
+		"Volunteer"
+	],
+	"enumNames": [
+		"A worker paid to perform services under the control of an employing organization (that directs what and how work is done). In the US, Common-law employees are the default IRS classification. Statutory employees are a subset of these workers, with specific tax treatment under IRS rules (e.g., certain drivers, insurance agents).",
+		"A worker, also referred to as Third-Party Worker, referring to an employee, representatives, personnel, agent, independent contractor, and assistant who works for and is paid by a third-party vendor (such as a manufacturer’s representative, employees of employee leasing firms, and professional employer firms) to perform services for an organization to which they provide products and services. The vendor (or third party) is the employer of record.",
+		"A self-employed worker who enters into contracts with employers to perform specific work, typically on a short-term basis, where the employing organization has the right to control or direct only the result of the work and not what will be done and how it will be done. In the U.S., this includes Statutory Non-employees direct sellers, licensed real estate agents, and companion sitters as defined by IRS guidelines.",
+		"A worker who provides services of their own accord and without compulsion."
+	]
+}
