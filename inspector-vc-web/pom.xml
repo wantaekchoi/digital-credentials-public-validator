@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.1edtech</groupId>
         <artifactId>vc-public-validator</artifactId>
-		<version>1.8.0</version>
+		<version>1.9.0</version>
 	</parent>
 	<artifactId>inspector-vc-web</artifactId>
 	<properties>
@@ -33,6 +33,12 @@
 		<dependency>
 			<groupId>org.1edtech</groupId>
 			<artifactId>inspector-clr</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.1edtech</groupId>
+			<artifactId>inspector-tcp-vc</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
